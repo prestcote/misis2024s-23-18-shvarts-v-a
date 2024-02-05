@@ -18,17 +18,17 @@ Complex& Complex::operator+=(const double rhs) {
   return *this;
 }
 
-Complex& operator+(const Complex& lhs, const Complex& rhs) {
+Complex operator+(const Complex& lhs, const Complex& rhs) {
   Complex sum(lhs);
   sum += rhs;
   return sum;
 }
-Complex& operator+(const Complex& lhs, const double rhs){
+Complex operator+(const Complex& lhs, const double rhs){
   Complex sum(lhs);
   sum += rhs;
   return sum;
 }
-Complex& operator+(const double lhs, const Complex& rhs){
+Complex operator+(const double lhs, const Complex& rhs){
   Complex sum(lhs);
   sum += rhs;
   return sum;
@@ -43,18 +43,18 @@ Complex& Complex::operator-= (const double rhs) {
   re -= rhs;
   return *this;
 }
-Complex& operator-(const Complex& lhs, const Complex& rhs) {
+Complex operator-(const Complex& lhs, const Complex& rhs) {
   Complex subs(lhs);
   subs -= rhs;
   return subs;
 }
-Complex& operator-(const Complex& lhs, const double rhs){
+Complex operator-(const Complex& lhs, const double rhs){
   Complex subs(lhs);
   subs -= rhs;
   return subs;
 }
 
-Complex& operator-(const double lhs, const Complex& rhs){
+Complex operator-(const double lhs, const Complex& rhs){
   Complex subs(lhs);
   subs -= rhs;
   return subs;
@@ -73,17 +73,17 @@ Complex& Complex::operator*=(const double rhs) {
   return *this;
 }
 
-Complex& operator*(const Complex& lhs, const Complex& rhs) {
+Complex operator*(const Complex& lhs, const Complex& rhs) {
   Complex mult(lhs);
   mult *= rhs;
   return mult;
 }
-Complex& operator*(const Complex& lhs, const double rhs){
+Complex operator*(const Complex& lhs, const double rhs){
   Complex Mult(lhs);
   Mult *= rhs;
   return Mult;
 }
-Complex& operator* (const double lhs, const Complex& rhs){
+Complex operator* (const double lhs, const Complex& rhs){
   Complex Mult(rhs);
   Mult *= lhs;
   return Mult;
@@ -108,22 +108,29 @@ Complex& Complex::operator/=(const double rhs) {
   im /= rhs;
   return *this;
 }
-Complex& operator/(const Complex& lhs, const Complex& rhs) {
+Complex operator/(const Complex& lhs, const Complex& rhs) {
   Complex div(lhs);
   div /= rhs;
   return div;
 }
 
-Complex& operator/(const Complex& lhs, const double rhs) {
+Complex operator/(const Complex& lhs, const double rhs) {
   Complex div(lhs);
   div /= rhs;
   return div;
 }
 
-Complex& operator/(const double lhs, const Complex& rhs) {
+Complex operator/(const double lhs, const Complex& rhs) {
   Complex div(lhs);
   div /= rhs;
   return div;
+}
+
+Complex Complex::operator-() const noexcept {
+  Complex sub = *this;
+  sub.re = -re;
+  sub.im = -im;
+  return sub;
 }
 
 bool Complex::operator== (const Complex& rhs) const noexcept {
@@ -137,12 +144,6 @@ Complex& Complex::operator=(const Complex& c) {
   re = c.re;
   im = c.im;
   return *this;
-}
-Complex& Complex::operator-(){
-  Complex sub = *this;
-  sub.re = -re;
-  sub.im = -im;
-  return sub;
 }
 
 std::ostream& operator<<(std::ostream& ostrm, const Complex& rhs) {
@@ -171,10 +172,3 @@ std::istream& operator>>(std::istream& istrm, Complex& rhs) {
   }
   return istrm;
 }
-
-Complex Complex::conjugate(){
-  Complex conj = *this;
-  conj.im = -conj.im;
-  return conj;
-}
-

@@ -467,7 +467,7 @@ void testMethods() {
     ostr << e.what();
   }
   correct_counter +=
-    printTestLog(ostr.str(), "Division by zero", " {6, 4} / 0");
+    printTestLog(ostr.str(), "DivisionByZeroException", " {6, 4} / 0");
   total_tests_counter += 1;
 
   ostr.str("");
@@ -531,6 +531,16 @@ void testMethods() {
   test_results = testInput("1, 2");
   ostr << test_results.first << " " << test_results.second;
   correct_counter += printTestLog(ostr.str(), "0 {0,0}", "Input: (1, 2}");
+  total_tests_counter += 1;
+
+  ostr.str("");
+  ostr << (Complex(12, 8) == Complex(11, 8));
+  correct_counter += printTestLog(ostr.str(), "0", "{12,8} != {11, 8}");
+  total_tests_counter += 1;
+
+  ostr.str("");
+  ostr << (Complex(-1, 2) == -Complex(1, -2));
+  correct_counter += printTestLog(ostr.str(), "1", "Complex(-1, 2) == -Complex(1, -2)");
   total_tests_counter += 1;
 
   // finally tests counting

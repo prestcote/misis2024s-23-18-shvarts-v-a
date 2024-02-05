@@ -17,12 +17,6 @@ Rational::Rational(const std::int64_t& num, const std::int64_t& den) {
   }
 };
 
-Rational& Rational::operator-() const {
-  Rational value(*this);
-  value.num_ *= (-1);
-  return value;
-}
-
 Rational& Rational::operator+=(const Rational& rhs) noexcept {
   int64_t num = num_;
   int64_t den = den_;
@@ -54,7 +48,6 @@ Rational operator+ (const Rational& lhs, const int64_t rhs) noexcept {
 }
 
 Rational& Rational::operator-=(const Rational& rhs) noexcept {
-  //Rational sub(*this);
   num_ = num_ * rhs.den_ - den_ * rhs.num_;
   den_ = den_ * rhs.den_;
   invrnt();
@@ -141,12 +134,14 @@ Rational operator/(const int64_t lhs, const Rational& rhs) { //DOIT
   res /= rhs;
   return res;
 }
+
 bool Rational::operator== (const Rational& rhs) const noexcept{
   return num_ == rhs.num_ && den_ == rhs.den_;
 }
 
-bool Rational::operator!=(const Rational& x) const noexcept { 
-  return !operator==(x); }
+bool Rational::operator!=(const Rational& rhs) const noexcept {
+  return !(*this == rhs);
+}
 
 bool Rational::operator<(const Rational& rhs) const noexcept {
   return (num_ * rhs.den_) < (rhs.num_ * den_);
@@ -201,24 +196,43 @@ int64_t Rational::nod(int64_t a, int64_t b) const {
   return a;
 }
 
-std::ostream& operator<< (std::ostream& stream, const Rational& rhs) {
-  return stream << rhs.num_ << rhs.separator << rhs.den_;
-}
-
-std::istream& operator>> (std::istream& istrm, Rational& rhs) {
+std::istream& Rational::ReadFrom (std::istream& istrm) noexcept {
   char separator(0);
   int64_t num(0);
-  int64_t den(0);
-  istrm >> num >> separator >> den;
-  if (!istrm.good()) {
+  int64_t den(1);
+  char check = istrm.peek();
+  istrm >> num;
+  char check1 = istrm.peek();
+  if (!istrm || check1 != '/') {
+    istrm.setstate(std::ios_base::failbit);
     return istrm;
   }
-  if (Rational::separator == separator && den > 0) {
-    rhs.num_ = num;
-    rhs.den_ = den;
+  istrm >> separator;
+  int64_t check2 = istrm.peek();
+  istrm >> den;
+  if (!istrm || check2 > '9' || check2 < '0') {
+    istrm.setstate(std::ios_base::failbit);
+    return istrm;
   }
   else {
-    istrm.setstate(std::ios_base::failbit);
+    if (Rational::separator == separator && den > 0) {
+      *this = Rational(num, den);
+    }
+    else {
+      istrm.setstate(std::ios_base::failbit);
+    }
   }
   return istrm;
+}
+
+std::ostream& Rational::WriteTo(std::ostream& ostrm) const noexcept {
+  ostrm << num_ << separator << den_;
+  return ostrm;
+}
+
+std::istream& operator>> (std::istream& istrm, Rational& rhs) noexcept {
+  return rhs.ReadFrom(istrm);
+}
+std::ostream& operator<<(std::ostream& ostrm, Rational& rhs) noexcept {
+  return rhs.WriteTo(ostrm);
 }

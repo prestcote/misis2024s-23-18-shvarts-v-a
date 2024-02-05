@@ -119,7 +119,8 @@ TEST_CASE("rational input") {
   std::istringstream input("5/8");
   Rational r1;
   input >> r1;
-  CHECK(r1 == Rational(5 / 8));
+  CHECK(r1.num() == 5);
+  CHECK(r1.den() == 8);
 }
 
 TEST_CASE("rational output") {
@@ -149,14 +150,13 @@ TEST_CASE("arithmetics (borrowed from Egor Chistov)") {
   CHECK_EQ(Rational(0), -Rational(0));
   CHECK_EQ(Rational(3, 4), -Rational(-3, 4));
 }; 
-/*
+
 TEST_CASE("IO") {
   std::istringstream istream("2/3");
   Rational reading;
   Rational r23(2, 3);
 
   istream >> reading;
-  CHECK_FALSE(istream.fail());
   CHECK(reading.num() == 2);
   CHECK(reading.den() == 3);
 
@@ -172,22 +172,39 @@ TEST_CASE("IO") {
 
   std::istringstream istream4("-712/38");
   istream4 >> reading;
-  CHECK(reading.num() == -712);
-  CHECK(reading.den() == 38);
-
-  std::istringstream istream5("-123 / 48");
+  CHECK(reading.num() == -356);
+  CHECK(reading.den() == 19);
+  
+  std::istringstream istream5("-123/48");
   istream5 >> reading;
-  CHECK(reading.num() == -123);
-  CHECK(reading.den() == 48);
-
+  CHECK(reading.num() == -41);
+  CHECK(reading.den() == 16);
+  
   std::istringstream istream6("7/ -8");
-  CHECK_THROWS(istream6 >> reading);
+  istream6 >> reading;
+  CHECK(istream6.fail());
+
+  std::istringstream istream8("2/ 3");
+  istream8 >> reading;
+  CHECK(istream6.fail());
+
+  std::istringstream istream9("2 /3");
+  istream9 >> reading;
+  CHECK(istream9.fail());
+
+  std::istringstream istream10("-13/0");
+  istream10 >> reading;
+  CHECK(istream9.fail());
+
+  std::istringstream istream11("-13 / -3");
+  istream11 >> reading;
+  CHECK(istream9.fail());
 
   std::istringstream istream7("4|54");
   istream7 >> reading;
   std::ostringstream ostream;
   CHECK(istream7.fail());
+
   ostream << Rational(2, 3);
   CHECK(ostream.str() == "2/3");
-};
-*/
+}; 
