@@ -18,7 +18,6 @@ DynArr::DynArr(const std::ptrdiff_t size) {
   }
 }
 
-
 DynArr::DynArr(const DynArr& to_copy) {
   size_ = to_copy.size_;
   capacity_ = to_copy.capacity_;
