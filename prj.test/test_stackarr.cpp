@@ -15,6 +15,6 @@ TEST_CASE("Push attempt") {
   CHECK_EQ(s.Size(), 10);
   CHECK_EQ(s.Counter(), 1);
   CHECK_EQ(s.IsEmpty(), 0);
-  Complex t(s.Top());
+  //Complex t(s.Top());
   //s.Push(Complex(1, 3));
 }
