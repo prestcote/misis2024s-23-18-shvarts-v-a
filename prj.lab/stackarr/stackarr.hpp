@@ -11,12 +11,13 @@ public:
   StackArr operator=(const StackArr& copy);
 
   void Push(Complex& new_element);
-  void Pop(const StackArr&) noexcept;
+  void Pop() noexcept;
   bool IsEmpty() noexcept;
   const Complex& Top();
 
   std::ptrdiff_t Size() const { return size_; }
   std::ptrdiff_t Counter() const { return counter_; }
+  Complex* Head() const { return head_; }
 
 private:
   std::ptrdiff_t size_ = 0;
@@ -24,5 +25,4 @@ private:
   Complex* head_ = data_ + counter_;
   std::ptrdiff_t counter_ = 0;
 };
-
 #endif

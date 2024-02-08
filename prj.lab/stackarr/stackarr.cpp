@@ -19,15 +19,14 @@ StackArr::StackArr(const StackArr& copy) {
 }
 
 bool StackArr::IsEmpty() noexcept {
-  if (counter_ == 0) { return true; }
-  else { return false; }
+  return !(counter_ > 0);
 } 
 
 const Complex& StackArr::Top() {
   return *head_;
 }
 
-void StackArr::Pop(const StackArr&) noexcept{
+void StackArr::Pop() noexcept{
   if (counter_ > 0) {
     std::cout << *(data_ + counter_);
     counter_ -= 1;
@@ -35,17 +34,20 @@ void StackArr::Pop(const StackArr&) noexcept{
 }
 
 void StackArr::Push(Complex& new_element) {
-  if (counter_ + 1 < size_) {
+  if (counter_+1 < size_) {
+    *(data_ + counter_) = new_element;
+    //data_[counter_] = new_element;
     counter_ += 1;
-    //*(data_ + counter_) = new_element;
-    data_[counter_] = new_element;
   }
   else {
     if (size_ == 0) {
       size_ = 10;
       Complex* data_ = new Complex[size_];
-      //*(data_ + counter_) = new_element;
-      data_[counter_] = new_element;
+      for (int i = size_; i < size_; i++) {
+        data_[i] = Complex();
+      }
+      *(data_ + counter_) = new_element;
+      //data_[counter_ + 1] = new_element;
       counter_ += 1;
     }
     else {
