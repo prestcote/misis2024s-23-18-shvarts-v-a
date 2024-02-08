@@ -8,16 +8,19 @@ public:
   StackArr() = default;
   StackArr(const StackArr& copy);
   ~StackArr();
-  StackArr operator=(const StackArr&);
+  StackArr operator=(const StackArr& copy);
 
-  void Push(const StackArr&);
+  void Push(Complex& new_element);
   void Pop(const StackArr&) noexcept;
-  bool IsEmpty(const StackArr&) noexcept;
-  const Complex& Top(const StackArr&);
+  bool IsEmpty() noexcept;
+  const Complex& Top();
+
+  std::ptrdiff_t Size() const { return size_; }
+  std::ptrdiff_t Counter() const { return counter_; }
 
 private:
   std::ptrdiff_t size_ = 0;
-  Complex* data_ = 0;
+  Complex* data_ = NULL;
   Complex* head_ = data_ + counter_;
   std::ptrdiff_t counter_ = 0;
 };
