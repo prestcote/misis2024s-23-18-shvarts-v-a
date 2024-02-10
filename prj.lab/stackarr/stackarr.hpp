@@ -16,13 +16,12 @@ public:
   const Complex& Top();
 
   std::ptrdiff_t Size() const { return size_; }
-  std::ptrdiff_t Counter() const { return counter_; }
-  Complex* Head() const { return head_; }
+  std::ptrdiff_t Head() const { return head_; }
+  Complex* Data() const { return data_; }
 
 private:
   std::ptrdiff_t size_ = 0;
-  Complex* data_ = NULL;
-  Complex* head_ = data_ + counter_;
-  std::ptrdiff_t counter_ = 0;
+  Complex* data_ = nullptr;
+  std::ptrdiff_t head_ = -1;
 };
 #endif

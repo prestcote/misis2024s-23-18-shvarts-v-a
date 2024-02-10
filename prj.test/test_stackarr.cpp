@@ -12,8 +12,12 @@ TEST_CASE("first attempt") {
 TEST_CASE("Push attempt") {
   StackArr s;
   s.Push(Complex(1, 2));
-  CHECK_EQ(s.Size(), 10);
-  CHECK_EQ(s.Counter(), 1);
+  CHECK_EQ(s.Size(), 12);
+  CHECK_EQ(s.Head(), 0);
   CHECK_EQ(s.IsEmpty(), 0);
-  //std::cout << s.Top();
+  //StackArr s2(s);
+  Complex t(1, 3);
+  s.Push(Complex (1, 2));
+  //StackArr s1(s);
+  //std::cout << s1.Data();
 }
