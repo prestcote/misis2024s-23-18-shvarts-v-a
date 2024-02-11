@@ -17,7 +17,6 @@ public:
 
   std::ptrdiff_t Size() const { return size_; }
   std::ptrdiff_t Head() const { return head_; }
-  Complex* Data() const { return data_; }
 
 private:
   std::ptrdiff_t size_ = 0;

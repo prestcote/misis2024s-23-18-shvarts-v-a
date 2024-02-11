@@ -42,12 +42,9 @@ void StackArr::Push(Complex& new_element) {
   }
   else {
     if (size_ == 0) {
-      size_ = 12;
+      size_ = 15;
       head_ += 1;
-      Complex* data_ = new Complex[15];
-      for (int i = 0; i < size_; i++) {
-        data_[i] = Complex(0, 0);
-      }
+      data_ = new Complex[size_];
      //*(data_ + head_) = new_element;
       data_[head_] = new_element;
     }
@@ -57,9 +54,6 @@ void StackArr::Push(Complex& new_element) {
       for (int i = 0; i < size_; i++) {
         //*(new_data + i) = (*this)[i];
         new_data[i] = data_[i];
-      }
-      for (int i = size_; i < new_size; i++) {
-        new_data[i] = Complex(0, 0);
       }
       delete[] data_;
       data_ = new_data;
@@ -74,7 +68,7 @@ void StackArr::Push(Complex& new_element) {
 StackArr StackArr::operator=(const StackArr& copy) {
   if (size_ == 0) {
     size_ = copy.size_;
-    Complex* data_ = new Complex[size_];
+    data_ = new Complex[size_];
     head_ = copy.head_;
     for (int i = 0; i < copy.size_; i++) {
       data_[i] = copy.data_[i];
