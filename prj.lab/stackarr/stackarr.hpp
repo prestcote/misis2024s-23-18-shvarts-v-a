@@ -1,11 +1,13 @@
 #pragma once
 #ifndef STACKARR_STACKARR_HPP
 #define STACKARR_STACKARR_HPP
-#include <complex/complex.hpp>
+
+//#include <complex/complex.hpp>
+
 #include <stdexcept>
 #include <cstddef>
 
-//class Complex;
+class Complex;
 
 class StackArr {
 public:

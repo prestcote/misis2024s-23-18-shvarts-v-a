@@ -32,6 +32,12 @@ Complex& StackArr::Top() {
   return *(data_ + head_);
 }
 
+const Complex& StackArr::Top() const {
+  if (head_ < 0) {
+    throw std::exception("stack underflow");
+  }
+  return *(data_ + head_);
+}
 void StackArr::Pop() noexcept{
   if (head_ > -1) {
     std::cout << *(data_ + head_);

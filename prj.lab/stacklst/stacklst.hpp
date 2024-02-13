@@ -9,11 +9,11 @@
 class StackLst {
 public:
   StackLst() = default;
-  ~StackLst() = default;
-  StackLst(const StackLst&) = default;
+  ~StackLst();
+  StackLst(const StackLst& copy);
   StackLst& operator=(const StackLst&) = default;
 
-  void Push(Complex& new_element);
+  void Push(const Complex& new_element);
   void Pop() noexcept;
   bool IsEmpty() const noexcept;
   void Clear() noexcept;

@@ -44,4 +44,5 @@ TEST_CASE("operator=") {
   s3.Push(Complex(1, 4));
   s3.Push(Complex(1, 5));
   s3.Push(Complex(1, 6));
+  std::cout << s3.Top();
 }
