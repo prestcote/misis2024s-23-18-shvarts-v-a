@@ -1,12 +1,14 @@
 #include <stackarr/stackarr.hpp>
 #include <complex/complex.hpp>
 #include <iostream>
+#include <stdexcept>
+
 
 StackArr::~StackArr() {
   if (data_) {
     delete[] data_;
   }
-}
+} 
 
 StackArr::StackArr(const StackArr& copy) {
   size_ = copy.head_ + 1;
@@ -19,11 +21,14 @@ StackArr::StackArr(const StackArr& copy) {
   }
 }
 
-bool StackArr::IsEmpty() noexcept {
-  return !(head_ >= 0);
+bool StackArr::IsEmpty() const noexcept {
+  return (0 <= head_);
 } 
 
-const Complex& StackArr::Top() {
+Complex& StackArr::Top() {
+  if (head_ < 0) {
+    throw std::exception("stack underflow");
+  }
   return *(data_ + head_);
 }
 
@@ -34,7 +39,7 @@ void StackArr::Pop() noexcept{
   }
 }
 
-void StackArr::Push(Complex& new_element) {
+void StackArr::Push(const Complex& new_element) {
   if (head_+1 < size_) {
     head_ += 1;
     //*(data_ + head_) = new_element;
@@ -42,7 +47,7 @@ void StackArr::Push(Complex& new_element) {
   }
   else {
     if (size_ == 0) {
-      size_ = 15;
+      size_ = 2;
       head_ += 1;
       data_ = new Complex[size_];
      //*(data_ + head_) = new_element;
@@ -65,7 +70,7 @@ void StackArr::Push(Complex& new_element) {
   }
 }
 
-StackArr StackArr::operator=(const StackArr& copy) {
+StackArr& StackArr::operator=(const StackArr& copy) {
   if (size_ == 0) {
     size_ = copy.size_;
     data_ = new Complex[size_];
@@ -81,9 +86,6 @@ StackArr StackArr::operator=(const StackArr& copy) {
       for (int i = 0; i < copy.size_; i++) {
         data_[i] = copy.data_[i];
       }
-      for (int i = copy.size_; i < size_; i++) {
-        data_[i] = Complex();
-      }
     }
     else {
       Complex* new_data = new Complex[copy.size_];
@@ -97,5 +99,10 @@ StackArr StackArr::operator=(const StackArr& copy) {
     }
   }
   return (*this);
+}
+
+void StackArr::Clear() noexcept {
+  head_ = -1;
+  size_ = 0;
 }
 

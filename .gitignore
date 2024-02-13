@@ -35,6 +35,9 @@
 .vs
 out
 
-# custom build folders
-bin.*
+# Build folders
+build
 build.*
+bin
+bin.*
+build.bat
