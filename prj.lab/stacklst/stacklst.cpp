@@ -2,6 +2,7 @@
 #include <complex/complex.hpp>
 #include <iostream>
 
+
 StackLst::~StackLst() {
   Node* present = head_;
   while (head_ != nullptr) {
@@ -25,10 +26,14 @@ StackLst::StackLst(const StackLst& copy) {
 StackLst::StackLst(const StackLst& copy) {
   Node* new_head = copy.head_;
   Node* present = copy.head_;
-  //new_head->v = present->v;
-  while (present->next != nullptr) {
+  Node* first_node = new Node;
+  head_ = first_node;
+  new_head = first_node;
+  first_node->v = present->v;
+  present = present->next;
+  while (present != nullptr) {
     Node* new_node = new Node;
-    new_node->v = present->next->v;
+    new_node->v = present->v;
     new_head->next = new_node;
     present = present->next;
     new_head = new_head->next;

@@ -17,6 +17,7 @@ TEST_CASE("were sooo down") {
   //s.Pop();
   StackLst s1(s);
   s1.Pop();
+  s1.Pop();
   std::cout << s1.Top();
   //std::cout << s.Top();
   //std::cout << s.Head();
