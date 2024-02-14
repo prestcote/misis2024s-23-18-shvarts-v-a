@@ -2,7 +2,6 @@
 #include <complex/complex.hpp>
 #include <iostream>
 
-
 StackLst::~StackLst() {
   Node* present = head_;
   while (head_ != nullptr) {
@@ -14,16 +13,30 @@ StackLst::~StackLst() {
 /*
 StackLst::StackLst(const StackLst& copy) {
   Node* node_copy = copy.head_;
-  if (copy.head_ != nullptr) {
+  if (head_ != nullptr) {
     Node* present = head_;
     while (present->next != nullptr) {
-      copy.Push(present->v);
+      Push(present->v);
       present = present->next;
     }
     present->next = nullptr;
   }
+}*/
+StackLst::StackLst(const StackLst& copy) {
+  Node* new_head = copy.head_;
+  Node* present = copy.head_;
+  //new_head->v = present->v;
+  while (present->next != nullptr) {
+    Node* new_node = new Node;
+    new_node->v = present->next->v;
+    new_head->next = new_node;
+    present = present->next;
+    new_head = new_head->next;
+  }
+  new_head->next = nullptr;
 }
-*/
+
+/*
 void StackLst::Push(const Complex& new_element) {
   Node* new_node = new Node;
   new_node->v = new_element;
@@ -38,7 +51,14 @@ void StackLst::Push(const Complex& new_element) {
     present->next = new_node;
   }
 }
-
+*/
+void StackLst::Push(const Complex& new_element) {
+  Node* new_node = new Node;
+  new_node->next = head_;
+  new_node->v = new_element;
+  head_ = new_node;
+}
+/*
 void StackLst::Pop() noexcept {
   if (head_ != nullptr) {
     Node* present = head_;
@@ -55,6 +75,15 @@ void StackLst::Pop() noexcept {
     }
     delete_this->next = nullptr;
   }
+}*/
+
+void StackLst::Pop() noexcept{
+  if (head_ != nullptr) {
+    Node* delete_node = head_;
+    head_ = head_->next;
+    delete delete_node;
+    delete_node = nullptr;
+  }
 }
 
 bool StackLst::IsEmpty() const noexcept {
@@ -62,7 +91,7 @@ bool StackLst::IsEmpty() const noexcept {
 }
 
 void StackLst::Clear() noexcept {}
-
+/*
 Complex& StackLst::Top() {
   Node* present = head_;
   while (present->next != nullptr) {
@@ -70,14 +99,16 @@ Complex& StackLst::Top() {
   }
   //present = present->next;
   return present->v;
+} */
+Complex& StackLst::Top() {
+  if (head_ != nullptr) {
+    return head_->v;
+  }
 }
 
 const Complex& StackLst::Top() const {
-  Node* present = head_;
-  while (present->next != nullptr) {
-    present = present->next;
+  if (head_ != nullptr) {
+    return head_->v;
   }
-  //present = present->next;
-  return present->v;
 }
 

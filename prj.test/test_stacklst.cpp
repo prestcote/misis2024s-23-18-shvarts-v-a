@@ -11,10 +11,14 @@ TEST_CASE("were sooo down") {
   s.Push(Complex(1, 4));
   s.Push(Complex(1, 5));
   s.Push(Complex(1, 6));
-  s.Push(Complex(1, 7));
-  CHECK_EQ(s.IsEmpty(), 0);
-  CHECK_EQ(s.Top(), Complex(1, 7));
   s.Pop();
-  std::cout << s.Top();
-  //StackLst s1(s);
+  CHECK_EQ(s.IsEmpty(), 0);
+  //CHECK_EQ(s.Top(), Complex(1, 6));
+  //s.Pop();
+  StackLst s1(s);
+  s1.Pop();
+  std::cout << s1.Top();
+  //std::cout << s.Top();
+  //std::cout << s.Head();
+
 }

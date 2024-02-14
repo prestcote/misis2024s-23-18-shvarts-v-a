@@ -11,7 +11,7 @@ public:
   StackLst() = default;
   ~StackLst();
   StackLst(const StackLst& copy);
-  StackLst& operator=(const StackLst&) = default;
+  StackLst& operator=(const StackLst&);
 
   void Push(const Complex& new_element);
   void Pop() noexcept;
@@ -20,6 +20,10 @@ public:
 
   Complex& Top();
   const Complex& Top() const;
+
+  Complex& Head() {
+    return head_->v;
+  }
 
 private:
   struct Node {
