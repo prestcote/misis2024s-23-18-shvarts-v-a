@@ -41,6 +41,18 @@ StackLst::StackLst(const StackLst& copy) {
   new_head->next = nullptr;
 }
 
+StackLst& StackLst::operator=(const StackLst& copy) {
+  StackLst new_list(copy);
+  return new_list;
+}
+
+void StackLst::Clear() noexcept{
+  while (head_ != nullptr) {
+    Pop();
+  }
+  
+}
+
 /*
 void StackLst::Push(const Complex& new_element) {
   Node* new_node = new Node;
@@ -95,7 +107,6 @@ bool StackLst::IsEmpty() const noexcept {
   return head_ == nullptr;
 }
 
-void StackLst::Clear() noexcept {}
 /*
 Complex& StackLst::Top() {
   Node* present = head_;
@@ -106,14 +117,16 @@ Complex& StackLst::Top() {
   return present->v;
 } */
 Complex& StackLst::Top() {
-  if (head_ != nullptr) {
-    return head_->v;
+  if (head_ == nullptr) {
+    throw std::exception("stack_underflow");
   }
+  return head_->v;
 }
 
 const Complex& StackLst::Top() const {
-  if (head_ != nullptr) {
-    return head_->v;
+  if (head_ == nullptr) {
+    throw std::exception("stack_underflow");
   }
+  return head_->v;
 }
 

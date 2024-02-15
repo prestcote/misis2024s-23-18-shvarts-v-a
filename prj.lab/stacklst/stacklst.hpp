@@ -11,12 +11,12 @@ public:
   StackLst() = default;
   ~StackLst();
   StackLst(const StackLst& copy);
-  StackLst& operator=(const StackLst&); //TODO
+  StackLst& operator=(const StackLst&); //TODO??!!!!!!!!!!!!!!!!!!!!!!!!!
 
   void Push(const Complex& new_element);
   void Pop() noexcept;
   bool IsEmpty() const noexcept;
-  void Clear() noexcept;  //TODO
+  void Clear() noexcept;  
 
   Complex& Top();
   const Complex& Top() const;
