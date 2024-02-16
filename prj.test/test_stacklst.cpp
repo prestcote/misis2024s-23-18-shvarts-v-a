@@ -24,6 +24,12 @@ TEST_CASE("were sooo down") {
   StackLst s2;
   s2 = s1;
   std::cout << s2.Top();
+  StackLst s3(s1);
+  s3.Push(Complex(1, 10));
+  s3.Push(Complex(1, 11));
+  s2 = s3;
+  std::cout << s2.Top();
+  
   s.Clear();
   CHECK_THROWS(s.Top());
   CHECK_EQ(s.IsEmpty(), 1);
