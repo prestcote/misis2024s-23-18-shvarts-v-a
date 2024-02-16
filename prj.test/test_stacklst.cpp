@@ -23,9 +23,8 @@ TEST_CASE("were sooo down") {
   //std::cout << s.Head();
   StackLst s2;
   s2 = s1;
-  //std::cout << s2.Top();
+  std::cout << s2.Top();
   s.Clear();
-  //s4.Top();
-  //std::cout << s.Top();
+  CHECK_THROWS(s.Top());
   CHECK_EQ(s.IsEmpty(), 1);
 }

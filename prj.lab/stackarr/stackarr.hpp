@@ -6,6 +6,7 @@
 
 #include <stdexcept>
 #include <cstddef>
+#include <cstdlib>
 
 class Complex;
 
