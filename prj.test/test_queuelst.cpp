@@ -27,6 +27,10 @@ TEST_CASE("push method") {
   std::cout << q.Top();
   std::cout << q.Tail() << std::endl;
   q.Pop();
+  q.Pop();
+  q.Pop();
+  q.Pop();
+  //std::cout << q.Top();
   CHECK_THROWS(std::cout << q.Top());
-  //CHECK_THROWS(std::cout << q.Tail());
+  CHECK_THROWS(std::cout << q.Tail());
 }

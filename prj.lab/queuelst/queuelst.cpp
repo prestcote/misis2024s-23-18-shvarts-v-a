@@ -1,5 +1,6 @@
 #include <queuelst/queuelst.hpp>
 #include <complex/complex.hpp>
+#include <stdexcept>
 
 void QueueLst::Push(Complex& new_element) {
   Node* new_node = new Node;
@@ -19,11 +20,22 @@ void QueueLst::Push(Complex& new_element) {
 }
 
 void QueueLst::Pop() noexcept {
-  if (head_ != nullptr) {
-    Node* cur = new Node;
-    cur = head_;
-    head_ = head_->next_;
-    delete cur;
+  if (head_ != nullptr && tail_ != nullptr) {
+    if (head_ != tail_) {
+      Node* cur = new Node;
+      cur = head_;
+      head_ = head_->next_;
+      delete cur;
+      cur = nullptr;
+    }
+    else if (head_ == tail_) {
+      Node* curr = new Node;
+      //curr = head_;
+      delete head_;
+      head_ = nullptr;
+      tail_ = nullptr;
+      //curr = nullptr;
+    }
   }
 }
 

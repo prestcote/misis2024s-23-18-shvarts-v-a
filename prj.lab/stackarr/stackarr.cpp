@@ -12,17 +12,17 @@ StackArr::~StackArr() {
 
 StackArr::StackArr(const StackArr& copy) {
   size_ = copy.head_ + 1;
-  data_ = NULL;
+  //data_ = nullptr;
   head_ = copy.head_;
-  Complex* data_ = new Complex[size_];
-  for (int i = 0; i < size_; i++) {
+  data_ = new Complex[size_];
+  for (int i = 0; i < size_; ++i) {
     //data_[i] = *(copy.data_ + i);
     data_[i] = copy.data_[i];
   }
 }
 
 bool StackArr::IsEmpty() const noexcept {
-  return (0 <= head_);
+  return (head_ == -1);
 } 
 
 Complex& StackArr::Top() {
@@ -78,7 +78,7 @@ void StackArr::Push(const Complex& new_element) {
 
 StackArr& StackArr::operator=(const StackArr& copy) {
   if (size_ == 0) {
-    size_ = copy.size_;
+    size_ = copy.head_ + 1;
     data_ = new Complex[size_];
     head_ = copy.head_;
     for (int i = 0; i < copy.size_; i++) {
