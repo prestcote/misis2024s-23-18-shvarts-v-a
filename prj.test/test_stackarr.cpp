@@ -21,6 +21,11 @@ TEST_CASE("Push attempt") {
   CHECK_EQ(s.Top(), Complex(1, 3));
   s.Pop();
   CHECK_EQ(s.Top(), Complex(1, 2));
+  s.Pop();
+  s.Pop();
+  s.Pop();
+  s.Pop();
+  s.Pop();
 }
 
 TEST_CASE("copy ctor") {
