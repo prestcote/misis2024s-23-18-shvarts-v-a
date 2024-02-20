@@ -8,6 +8,7 @@ int pos(int x) {
     x /= 10;
   }
   return res;
+
 }
 
 
