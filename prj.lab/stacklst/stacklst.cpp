@@ -23,23 +23,28 @@ StackLst::StackLst(const StackLst& copy) {
     present->next = nullptr;
   }
 }*/
+
 StackLst::StackLst(const StackLst& copy) {
-  Node* new_head = copy.head_;
-  Node* present = copy.head_;
-  Node* first_node = new Node;
-  head_ = first_node;
-  new_head = first_node;
-  first_node->v = present->v;
-  present = present->next;
-  while (present != nullptr) {
-    Node* new_node = new Node;
-    new_node->v = present->v;
-    new_head->next = new_node;
+  if (copy.head_ != nullptr) {
+    Node* new_head = copy.head_;
+    Node* present = copy.head_;
+    Node* first_node = new Node;
+    head_ = first_node;
+    new_head = first_node;
+    first_node->v = present->v;
     present = present->next;
-    new_head = new_head->next;
+    while (present != nullptr) {
+      Node* new_node = new Node;
+      new_node->v = present->v;
+      new_head->next = new_node;
+      present = present->next;
+      new_head = new_head->next;
+    }
+    new_head->next = nullptr;
   }
-  new_head->next = nullptr;
 }
+
+
 /*
 StackLst& StackLst::operator=(const StackLst& copy) {
   Clear();
@@ -49,32 +54,32 @@ StackLst& StackLst::operator=(const StackLst& copy) {
 } */
 
 StackLst& StackLst::operator=(const StackLst& copy) {
-  if (head_ != nullptr) {
-    Clear();
-  }
-  Node* new_head = copy.head_;
-  Node* present = copy.head_;
-  Node* first_node = new Node;
-  head_ = first_node;
-  new_head = first_node;
-  first_node->v = present->v;
-  present = present->next;
-  while (present != nullptr) {
-    Node* new_node = new Node;
-    new_node->v = present->v;
-    new_head->next = new_node;
+  if (copy.head_ != nullptr) {
+    if (head_ != nullptr) {
+      Clear();
+    }
+    Node* new_head = copy.head_;
+    Node* present = copy.head_;
+    Node* first_node = new Node;
+    head_ = first_node;
+    new_head = first_node;
+    first_node->v = present->v;
     present = present->next;
-    new_head = new_head->next;
+    while (present != nullptr) {
+      Node* new_node = new Node;
+      new_node->v = present->v;
+      new_head->next = new_node;
+      present = present->next;
+      new_head = new_head->next;
+    }
+    new_head->next = nullptr;
   }
-  new_head->next = nullptr;
   return (*this);
 }
 
 void StackLst::Clear() noexcept{
-  if (head_ != nullptr) {
-    while (head_ != nullptr) {
-      Pop();
-    }
+  while (head_ != nullptr) {
+    Pop();
   }
 }
 
@@ -129,7 +134,7 @@ void StackLst::Pop() noexcept{
 }
 
 bool StackLst::IsEmpty() const noexcept {
-  return head_ == nullptr;
+  return (head_ == nullptr);
 }
 
 /*
@@ -143,14 +148,14 @@ Complex& StackLst::Top() {
 } */
 Complex& StackLst::Top() {
   if (head_ == nullptr) {
-    throw std::exception("stack_underflow");
+    throw std::logic_error("StackLst - try get top form empty stack.");
   }
   return head_->v;
 }
 
 const Complex& StackLst::Top() const {
   if (head_ == nullptr) {
-    throw std::exception("stack_underflow");
+    throw std::logic_error("StackLst - try get top form empty stack.");
   }
   return head_->v;
 }

@@ -34,3 +34,33 @@ TEST_CASE("push method") {
   CHECK_THROWS(std::cout << q.Top());
   CHECK_THROWS(std::cout << q.Tail());
 }
+
+TEST_CASE("copy ctor") {
+  QueueLst q;
+  QueueLst q_copy(q);
+  CHECK_EQ(q_copy.IsEmpty(), 1);
+  q_copy.Push(Complex(1, 1));
+  q_copy.Push(Complex(1, 2));
+  CHECK_EQ(q_copy.Top(), Complex(1, 1));
+  CHECK_EQ(q_copy.Tail(), Complex(1, 2));
+  q_copy.Pop();
+  CHECK_EQ(q_copy.Top(), Complex(1, 2));
+  CHECK_EQ(q_copy.Tail(), Complex(1, 2));
+  q_copy.Pop();
+  CHECK_EQ(q_copy.IsEmpty(), 1);
+}
+
+TEST_CASE("operator=") {
+  QueueLst q;
+  QueueLst q_copy = q;
+  CHECK_EQ(q_copy.IsEmpty(), 1);
+  q_copy.Push(Complex(1, 1));
+  q_copy.Push(Complex(1, 2));
+  CHECK_EQ(q_copy.Top(), Complex(1, 1));
+  CHECK_EQ(q_copy.Tail(), Complex(1, 2));
+  q_copy.Pop();
+  CHECK_EQ(q_copy.Top(), Complex(1, 2));
+  CHECK_EQ(q_copy.Tail(), Complex(1, 2));
+  q_copy.Pop();
+  CHECK_EQ(q_copy.IsEmpty(), 1);
+}
