@@ -3,8 +3,6 @@
 #define STACKARR_STACKARR_HPP
 
 //#include <complex/complex.hpp>
-
-#include <stdexcept>
 #include <cstddef>
 #include <cstdlib>
 

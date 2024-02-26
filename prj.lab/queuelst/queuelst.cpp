@@ -1,6 +1,7 @@
 #include <queuelst/queuelst.hpp>
-#include <complex/complex.hpp>
+//#include <complex/complex.hpp>
 #include <stdexcept>
+#include <cstdlib>
 
 void QueueLst::Push(Complex& new_element) {
   Node* new_node = new Node;
@@ -28,6 +29,13 @@ void QueueLst::Pop() noexcept {
 }
 
 Complex& QueueLst::Top() {
+  if (head_ == nullptr) {
+    throw std::logic_error("QueueLst - try get top form empty queue.");
+  }
+  return head_->v;
+}
+
+const Complex& QueueLst::Top() const{
   if (head_ == nullptr) {
     throw std::logic_error("QueueLst - try get top form empty queue.");
   }

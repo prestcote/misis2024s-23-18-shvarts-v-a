@@ -11,7 +11,7 @@ public:
   StackLst() = default;
   ~StackLst();
   StackLst(const StackLst& copy);
-  StackLst& operator=(const StackLst&); //TODO??!!!!!!!!!!!!!!!!!!!!!!!!!
+  StackLst& operator=(const StackLst&);
 
   void Push(const Complex& new_element);
   void Pop() noexcept;
