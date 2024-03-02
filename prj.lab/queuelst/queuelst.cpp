@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <cstdlib>
 
-void QueueLst::Push(Complex& new_element) {
+void QueueLst::Push(const Complex& new_element) {
   Node* new_node = new Node;
   new_node->v = new_element;
   if (head_ == nullptr) {
@@ -49,7 +49,7 @@ Complex& QueueLst::Tail() {
   return tail_->v;
 }
 
-bool QueueLst::IsEmpty() noexcept {
+bool QueueLst::IsEmpty() const noexcept {
   return (head_ == nullptr);
 }
 
@@ -58,7 +58,7 @@ void QueueLst::Clear() noexcept {
     Pop();
   }
 }
-
+/*
 QueueLst::~QueueLst() {
   Node* present = head_;
   while (head_ != nullptr) {
@@ -69,7 +69,8 @@ QueueLst::~QueueLst() {
   }
   tail_ = nullptr;
 }
-
+*/
+/*
 QueueLst::QueueLst(const QueueLst& copy) {
   if (copy.head_ != nullptr) {
     Node* new_head = copy.head_;
@@ -90,7 +91,8 @@ QueueLst::QueueLst(const QueueLst& copy) {
     tail_ = new_head;
   }
 }
-
+*/
+/*
 QueueLst& QueueLst::operator=(const QueueLst& copy) {
   if (copy.head_ != nullptr) {
     if (head_ != nullptr) {
@@ -115,3 +117,4 @@ QueueLst& QueueLst::operator=(const QueueLst& copy) {
   }
   return (*this);
 }
+*/

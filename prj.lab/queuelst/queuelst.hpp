@@ -10,13 +10,15 @@ class QueueLst {
 public:
 
   QueueLst() = default;
-  ~QueueLst();
-  QueueLst(const QueueLst& copy); 
-  QueueLst& operator=(const QueueLst& copy);
+  ~QueueLst() = default;
+  QueueLst(const QueueLst&) = default; 
+  QueueLst(QueueLst&&) = default;
+  QueueLst& operator=(const QueueLst&) = default;
+  QueueLst& operator=(QueueLst&&) = default;
 
-  void Push(Complex& new_element);
+  void Push(const Complex& new_element);
   void Pop() noexcept;
-  bool IsEmpty() noexcept;
+  bool IsEmpty() const noexcept;
   Complex& Top();
   const Complex& Top() const;
   void Clear() noexcept;
