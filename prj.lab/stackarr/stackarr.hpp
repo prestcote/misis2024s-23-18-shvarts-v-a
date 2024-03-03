@@ -12,8 +12,10 @@ class StackArr {
 public:
   StackArr() = default;
   StackArr(const StackArr& copy);
+  StackArr(StackArr&& copy);
   ~StackArr();
   StackArr& operator=(const StackArr& copy);
+  StackArr& operator=(StackArr&&);
 
   void Push(const Complex& new_element);
   void Pop() noexcept;

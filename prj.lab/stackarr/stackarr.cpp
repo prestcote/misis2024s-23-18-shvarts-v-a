@@ -16,7 +16,6 @@ StackArr::StackArr(const StackArr& copy) {
   head_ = copy.head_;
   data_ = new Complex[size_];
   for (int i = 0; i < size_; ++i) {
-    //data_[i] = *(copy.data_ + i);
     data_[i] = copy.data_[i];
   }
 }
@@ -110,5 +109,26 @@ StackArr& StackArr::operator=(const StackArr& copy) {
 void StackArr::Clear() noexcept {
   head_ = -1;
   size_ = 0;
+}
+
+StackArr::StackArr(StackArr&& copy) {
+  size_ = copy.size_;
+  head_ = copy.head_;
+  for (int i = 0; i < size_; ++i) {
+    data_[i] = copy.data_[i];
+  }
+  copy.data_ = nullptr;
+}
+
+StackArr& StackArr::operator=(StackArr&& copy) {
+  if (this != &copy) {
+    size_ = copy.size_;
+    head_ = copy.head_;
+    for (int i = 0; i < size_; ++i) {
+      data_[i] = copy.data_[i];
+    }
+    copy.data_ = nullptr;
+  }
+  return *this;
 }
 

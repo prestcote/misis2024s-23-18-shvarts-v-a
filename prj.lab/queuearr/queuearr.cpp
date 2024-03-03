@@ -4,7 +4,7 @@
 
 QueueArr::QueueArr(const QueueArr& qu) {
   if (!qu.IsEmpty()) {
-    size_ = (tail_ + qu.size_ + 1 - head_) % qu.size_;
+    size_ = (tail_ + qu.size_ - head_) % qu.size_ + 1;
     head_ = 0;
     tail_ = size_;
     size_ = (size_ + 4) / 4 * 4;
@@ -27,24 +27,24 @@ QueueArr::~QueueArr() {
 void QueueArr::Push(const Complex& val) {
   if (nullptr == data_) {
     data_ = new Complex[1];
-    data_ = new Complex[1];
-    size_ = 1;
     head_ = 0;
     tail_ = 0;
+    size_ = 1;
   }
   else {
     if (head_ == (tail_ + 1) % size_) {
-      std::ptrdiff_t newSize = size_ * 2;
-      Complex* newData = new Complex[newSize];
+      std::ptrdiff_t new_size = size_ * 2;
+      Complex* new_data = new Complex[new_size];
       std::ptrdiff_t count = Count();
-      for (std::ptrdiff_t i = 0; i < count; ++i) {
-        newData[i] = data_[(head_ + i) % size_];
+      for (int i = 0; i < count; i++) {
+        //*(new_data + i) = (*this)[i];
+        new_data[i] = data_[(head_ + i) % size_];
       }
       delete[] data_;
-      data_ = newData;
-      size_ = newSize;
+      data_ = new_data;
+      size_ = new_size;
       head_ = 0;
-      tail_ = Count() - 1;
+      tail_ = Count();
     }
     else {
       tail_ = (tail_ + 1) % size_;
@@ -66,7 +66,10 @@ void QueueArr::Pop() noexcept {
 
 
 std::ptrdiff_t QueueArr::Count() const {
-  return IsEmpty() ? 0 : (tail_ + size_ + 1 - head_) % size_;
+  if (head_ == -1 || tail_ == -1) {
+    return 0;
+  }
+  return (tail_ - head_ + size_) % size_ + 1;
 }
 
 Complex& QueueArr::Top() {

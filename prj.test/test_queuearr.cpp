@@ -13,6 +13,19 @@ TEST_CASE("wellllll") {
   std::cout << s.Top() << s.Tail() << std:: endl;
   s.Push(Complex(1, 4));
   std::cout << s.Top() << s.Tail() << std::endl;
+  s.Push(Complex(1, 5));
+  std::cout << s.Top() << s.Tail() << std::endl;
+  s.Push(Complex(1, 6));
+  std::cout << s.Top() << s.Tail() << std::endl;
   s.Pop();
   std::cout << s.Top() << s.Tail() << std::endl;
+  s.Pop();
+  std::cout << s.Top() << s.Tail() << std::endl;
+  s.Pop();
+  std::cout << s.Top() << s.Tail() << std::endl;
+  s.Push(Complex(1, 10));
+  std::cout << s.Top() << s.Tail() << std::endl;
+  s.Push(Complex(1, 11));
+  std::cout << s.Top() << s.Tail() << std::endl;
+
 }

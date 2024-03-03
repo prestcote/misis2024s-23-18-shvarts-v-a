@@ -12,8 +12,10 @@ public:
   Rational(const std::int64_t& num_, const std::int64_t& den_);
   ~Rational() = default;
   Rational(const Rational& x) = default; //копирование
+  Rational(Rational&&) = default;
 
   Rational& operator=(const Rational&) = default;
+  Rational& operator=(Rational&&) = default;
   Rational operator-() const noexcept { return { -num_, den_ }; }
 
   Rational& operator+=(const Rational& rhs) noexcept;

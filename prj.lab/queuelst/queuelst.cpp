@@ -72,23 +72,10 @@ QueueLst::~QueueLst() {
 */
 /*
 QueueLst::QueueLst(const QueueLst& copy) {
-  if (copy.head_ != nullptr) {
-    Node* new_head = copy.head_;
-    Node* present = copy.head_;
-    Node* first_node = new Node;
-    head_ = first_node;
-    new_head = first_node;
-    first_node->v = present->v;
-    present = present->next_;
-    while (present != nullptr) {
-      Node* new_node = new Node;
-      new_node->v = present->v;
-      new_head->next_ = new_node;
-      present = present->next_;
-      new_head = new_head->next_;
-    }
-    new_head->next_ = nullptr;
-    tail_ = new_head;
+  Node* copy_head = copy.head_;
+  while (copy_head != nullptr) {
+    Push(copy_head->v);
+    copy_head = copy_head->next_;
   }
 }
 */

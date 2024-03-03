@@ -9,6 +9,7 @@ struct Complex {
   Complex();
   Complex(double re, double im);
   Complex(const Complex& c) = default; 
+  Complex(Complex&&) = default;
   explicit Complex(const double re);
   ~Complex() = default;
 
@@ -16,6 +17,7 @@ struct Complex {
   std::istream& ReadFrom(std::istream& istrm) noexcept; 
 
   Complex& operator=(const Complex& c);
+  Complex& operator=(Complex&&) = default;
   Complex operator-() const noexcept;
 
   Complex& operator+=(const Complex& rhs);

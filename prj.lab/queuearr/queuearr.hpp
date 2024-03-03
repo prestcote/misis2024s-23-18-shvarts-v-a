@@ -11,7 +11,9 @@ public:
   QueueArr() = default;
   ~QueueArr();
   QueueArr(const QueueArr& copy);
+  QueueArr(QueueArr&&) = default;
   QueueArr& operator=(const QueueArr&) = default;
+  QueueArr& operator=(QueueArr&&) = default;
 
   void Push(const Complex& new_element);
   void Pop() noexcept;
@@ -22,13 +24,13 @@ public:
 
   Complex& Tail();
 
-  std::ptrdiff_t Count() const;
-
 private:
   Complex* data_ = nullptr;
   std::ptrdiff_t head_ = -1;
   std::ptrdiff_t tail_ = -1;
   std::ptrdiff_t size_ = 0;
+
+  std::ptrdiff_t Count() const;
 
 };
 
