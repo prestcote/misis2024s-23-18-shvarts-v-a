@@ -26,6 +26,9 @@ add_executable(test_queuearr test_queuearr.cpp)
 target_link_libraries(test_queuearr queuearr)
 target_link_libraries(test_queuearr complex)
 
+add_executable(test_queuelstp test_queuelstp.cpp)
+target_link_libraries(test_queuelstp queuelstp)
+
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_complex)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_rational)

@@ -5,10 +5,12 @@
 #include <complex/complex.hpp>
 #include <cstdlib>
 #include <cstddef>
+#include <memory>
 
 class QueueArr {
 public:
-  QueueArr() = default;
+  // QueueArr() { auto data_ = std::make_unique<Complex>; }
+  QueueArr() = default;;
   ~QueueArr();
   QueueArr(const QueueArr& copy);
   QueueArr(QueueArr&&) = default;
