@@ -60,7 +60,7 @@ void QueueLst::Clear() noexcept {
 }
 /*
 QueueLst::~QueueLst() {
-  Node* present = head_;
+  Node* cur = head_;
   while (head_ != nullptr) {
     Node* cur = head_;
     head_ = head_->next_;

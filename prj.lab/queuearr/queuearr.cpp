@@ -1,6 +1,7 @@
 #include <queuearr/queuearr.hpp>
 #include <stdexcept>
 #include <cstdlib>
+#include <algorithm>
 
 QueueArr::QueueArr(const QueueArr& qu) {
   if (!qu.IsEmpty()) {
@@ -17,6 +18,25 @@ QueueArr::QueueArr(const QueueArr& qu) {
       std::copy(qu.data_, qu.data_ + qu.tail_, data_ + qu.size_);
     }
   }
+}
+
+QueueArr& QueueArr::operator=(const QueueArr& copy) {
+  if (this != &copy) {
+    delete data_;
+    size_ = (tail_ + copy.size_ - head_) % copy.size_ + 1;
+    head_ = 0;
+    tail_ = size_;
+    size_ = (size_ + 4) / 4 * 4;
+    data_ = new Complex[size_];
+    if (copy.head_ < copy.tail_) {
+      std::copy(copy.data_ + copy.head_, copy.data_ + copy.tail_, data_);
+    }
+    else {
+      std::copy(copy.data_ + copy.head_, copy.data_ + copy.size_, data_);
+      std::copy(copy.data_, copy.data_ + copy.tail_, data_ + copy.size_);
+    }
+  }
+  return *this;
 }
 
 QueueArr::~QueueArr() {

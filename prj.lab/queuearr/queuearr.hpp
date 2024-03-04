@@ -14,7 +14,7 @@ public:
   ~QueueArr();
   QueueArr(const QueueArr& copy);
   QueueArr(QueueArr&&) = default;
-  QueueArr& operator=(const QueueArr&) = default;
+  QueueArr& operator=(const QueueArr& copy);
   QueueArr& operator=(QueueArr&&) = default;
 
   void Push(const Complex& new_element);

@@ -1,18 +1,18 @@
 #pragma once
-#ifndef QUEUELSTP_HPP_HPP
-#define QUEUELSTP_HPP_HPP
+#ifndef QUEUELSTPR_HPP_HPP
+#define QUEUELSTPR_HPP_HPP
 
 #include <cstdlib>
 #include <cstddef>
 
-class QueueLstP {
+class QueueLstPr {
 public:
-  QueueLstP() = default;
-  QueueLstP(const QueueLstP&) = default;
-  QueueLstP(QueueLstP&&) = default;
-  QueueLstP& operator=(const QueueLstP&) = default;
-  QueueLstP& operator=(QueueLstP&&) = default;
-  ~QueueLstP() = default;
+  QueueLstPr() = default;
+  QueueLstPr(const QueueLstPr& copy);
+  QueueLstPr(QueueLstPr&&) = default;
+  QueueLstPr& operator=(const QueueLstPr& copy);
+  QueueLstPr& operator=(QueueLstPr&&) = default;
+  ~QueueLstPr();
 
   float& Top();
   const float& Top() const;
@@ -20,6 +20,8 @@ public:
   void Pop() noexcept;
   bool IsEmpty() noexcept;
   void Clear() noexcept;
+
+  void Print();
 
 private:
   struct Node {
