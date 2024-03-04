@@ -9,9 +9,9 @@
 
 class QueueArr {
 public:
-  // QueueArr() { auto data_ = std::make_unique<Complex>; }
-  QueueArr() = default;;
-  ~QueueArr();
+  QueueArr() { auto data_ = std::make_unique<Complex>; }
+  //QueueArr() = default;;
+  ~QueueArr() = default;
   QueueArr(const QueueArr& copy);
   QueueArr(QueueArr&&) = default;
   QueueArr& operator=(const QueueArr& copy);
@@ -33,7 +33,7 @@ private:
   std::ptrdiff_t size_ = 0;
 
   std::ptrdiff_t Count() const;
-
+  std::ptrdiff_t counter = 0;
 };
 
 #endif
