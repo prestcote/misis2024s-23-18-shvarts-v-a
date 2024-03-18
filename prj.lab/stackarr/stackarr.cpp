@@ -1,7 +1,9 @@
 #include <stackarr/stackarr.hpp>
 #include <complex/complex.hpp>
+
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 
 StackArr::~StackArr() {
@@ -115,7 +117,7 @@ void StackArr::Clear() noexcept {
   size_ = 0;
 }
 
-StackArr::StackArr(StackArr&& copy) noexcept {
+StackArr::StackArr(StackArr&& copy) {
   if (this != &copy) {
     size_ = copy.size_;
     head_ = copy.head_;
@@ -126,7 +128,7 @@ StackArr::StackArr(StackArr&& copy) noexcept {
   }
 }
 
-StackArr& StackArr::operator=(StackArr&& copy) noexcept{
+StackArr& StackArr::operator=(StackArr&& copy) {
   if (this != &copy) {
     size_ = copy.size_;
     head_ = copy.head_;

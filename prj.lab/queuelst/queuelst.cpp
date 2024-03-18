@@ -68,7 +68,6 @@ QueueLst::QueueLst(QueueLst&& copy) {
 
 QueueLst& QueueLst::operator=(QueueLst&& copy) {
   if (this != &copy) {
-    Clear();
     std::swap(tail_, copy.tail_);
     std::swap(head_, copy.head_);
   }
