@@ -6,10 +6,10 @@
 
 class BitSet {
 public:
-  Bitset() = default;
-  ~Bitset() = default;
-  Bitset(const BitSet&) = default;
-  Bitset(BitSet&&) = default;
+  BitSet() = default;
+  ~BitSet() = default;
+  BitSet(const BitSet&) = default;
+  BitSet(BitSet&&) = default;
 
   BitSet& operator=(const BitSet&) = default;
   BitSet& operator=(BitSet&&) = default;
@@ -19,15 +19,15 @@ public:
   bool Get(const int32_t);
   void Set(const int32_t, const bool);
 
-  BitSet& operator&(const BitSet&) = default;
-  BitSet& operator|(const BitSet&) = default;
-  BitSet& operator~(const BitSet&) = default;
-  BitSet& operator^(const BitSet&) = default;
+  BitSet& operator&(const BitSet&);
+  BitSet& operator|(const BitSet&);
+  BitSet& operator~();
+  BitSet& operator^(const BitSet&);
 
   void Fill(const bool);
 
 private:
-  size_ = 0;
+  uint32_t size_ = 0;
   std::vector <uint32_t> set;
 
 };
