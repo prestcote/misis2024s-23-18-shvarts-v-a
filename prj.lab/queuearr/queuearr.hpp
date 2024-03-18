@@ -2,20 +2,19 @@
 #ifndef QUEUEARR_HPP_HPP
 #define QUEUEARR_HPP_HPP
 
-#include <complex/complex.hpp>
+#include "complex/complex.hpp"
 #include <cstdlib>
 #include <cstddef>
 #include <memory>
 
 class QueueArr {
 public:
-  QueueArr() { auto data_ = std::make_unique<Complex>; }
-  //QueueArr() = default;;
-  ~QueueArr() = default;
+  QueueArr() = default;;
+  ~QueueArr();
   QueueArr(const QueueArr& copy);
-  QueueArr(QueueArr&&) = default;
+  QueueArr(QueueArr&& copy);
   QueueArr& operator=(const QueueArr& copy);
-  QueueArr& operator=(QueueArr&&) = default;
+  QueueArr& operator=(QueueArr&& copy);
 
   void Push(const Complex& new_element);
   void Pop() noexcept;
@@ -27,7 +26,9 @@ public:
   Complex& Tail();
 
 private:
-  Complex* data_ = nullptr;
+  std::unique_ptr<Complex[]> data_ = nullptr;
+  //auto data_ = std::make_unique<Complex>(nullptr);
+  //std::unique_ptr<Complex> data_ = std::make_unique<Complex>(nullptr);
   std::ptrdiff_t head_ = -1;
   std::ptrdiff_t tail_ = -1;
   std::ptrdiff_t size_ = 0;

@@ -6,11 +6,11 @@ class DynArr {
 public:
   DynArr() = default; //default constructor 
   DynArr(const DynArr& to_copy); //copy constructor
-  DynArr(DynArr&&) = default;
+  DynArr(DynArr&& mov) noexcept;
   DynArr(const std::ptrdiff_t size);  //by size
   ~DynArr(); //destructor
   DynArr& operator=(const DynArr& to_copy); //assignment
-  DynArr& operator=(DynArr&&) = default;
+  DynArr& operator=(DynArr&&) noexcept;
 
   std::ptrdiff_t Size() const { return size_; } 
   std::ptrdiff_t Capacity() const { return capacity_; } 

@@ -2,20 +2,18 @@
 #ifndef STACKARR_STACKARR_HPP
 #define STACKARR_STACKARR_HPP
 
-//#include <complex/complex.hpp>
+#include <complex/complex.hpp>
 #include <cstddef>
 #include <cstdlib>
-
-class Complex;
 
 class StackArr {
 public:
   StackArr() = default;
   StackArr(const StackArr& copy);
-  StackArr(StackArr&& copy);
+  StackArr(StackArr&& copy) noexcept;
   ~StackArr();
   StackArr& operator=(const StackArr& copy);
-  StackArr& operator=(StackArr&&);
+  StackArr& operator=(StackArr&& copy) noexcept;
 
   void Push(const Complex& new_element);
   void Pop() noexcept;

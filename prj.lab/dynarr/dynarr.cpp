@@ -81,5 +81,31 @@ DynArr& DynArr::operator=(const DynArr& to_copy) {
   return *this;
 }
 
+DynArr::DynArr(DynArr&& mov) noexcept {
+  if (this != &mov) {
+    data_ = mov.data_;
+    capacity_ = mov.capacity_;
+    size_ = mov.size_;
+    mov.data_ = nullptr;
+    mov.size_ = 0;
+    mov.capacity_ = 0;
+  }
+}
+
+DynArr& DynArr::operator=(DynArr&& mov) noexcept{
+  if (this != &mov) {
+    delete[] data_;
+    data_ = mov.data_;
+    capacity_ = mov.capacity_;
+    size_ = mov.size_;
+    mov.data_ = nullptr;
+    mov.capacity_ = 0;
+    mov.size_ = 0;
+  }
+  return *this;
+}
+
+
+
 
 

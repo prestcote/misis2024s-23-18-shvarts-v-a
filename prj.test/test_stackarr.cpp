@@ -41,11 +41,13 @@ TEST_CASE("copy ctor") {
 TEST_CASE("operator=") {
   StackArr s;
   s.Push(Complex(1, 2));
+  s.Push(Complex(1, 1));
+  s.Push(Complex(1, 3));
   StackArr s3;
   s3 = s;
-  CHECK_EQ(s3.Head(), 0);
-  CHECK_EQ(s3.Size(), 2);
-  CHECK_EQ(s3.Top(), Complex(1, 2));
+  CHECK_EQ(s3.Head(), 2);
+  CHECK_EQ(s3.Size(), 3);
+  CHECK_EQ(s3.Top(), Complex(1, 3));
   s3.Push(Complex(1, 4));
   s3.Push(Complex(1, 5));
   s3.Push(Complex(1, 6));
@@ -60,16 +62,27 @@ TEST_CASE("def ctor") {
   StackArr sa;
 }
 
+TEST_CASE("initlist ctor") {
+  //StackArr sa = { c1, c2, c3 };
+  StackArr sa;
+  sa.Push(c1);
+  sa.Push(c2);
+  sa.Push(c3);
+
+  CHECK_EQ(c3, sa.Top());
+  sa.Pop();
+  CHECK_EQ(c2, sa.Top());
+  sa.Pop();
+  CHECK_EQ(c1, sa.Top());
+}
+
 TEST_CASE("copy ctor") {
-  //StackArr sa_parent = { c1, c2, c3 };
   StackArr sa_parent;
   sa_parent.Push(c1);
   sa_parent.Push(c2);
   sa_parent.Push(c3);
-  //StackArr sa(sa_parent);
-  StackArr sa;
-  sa.Push(Complex(7, 8));
-  sa = sa_parent;
+
+  StackArr sa(sa_parent);
 
   CHECK_EQ(c3, sa.Top());
   sa.Pop();
@@ -107,5 +120,25 @@ TEST_CASE("empty check") {
   sa.Pop();
 
   CHECK_EQ(sa.IsEmpty(), true);
-  CHECK_THROWS(sa.Top());
+  CHECK_THROWS((void)sa.Top());
+}
+
+TEST_CASE("stackarr ctor") {
+  StackArr stack;
+  CHECK_EQ(stack.IsEmpty(), 1);
+  StackArr stack_copy(stack);
+  CHECK_EQ(stack_copy.IsEmpty(), 1);
+}
+
+TEST_CASE("push, pop, top, clear") {
+  StackArr stack;
+  CHECK_THROWS(void(stack.Top()));
+  stack.Push(Complex(1, 2));
+  CHECK_EQ(stack.IsEmpty(), 0);
+  CHECK_EQ(stack.Top(), Complex(1, 2));
+  stack.Pop();
+  CHECK_EQ(stack.IsEmpty(), 1);
+  stack.Push(Complex(1));
+  stack.Clear();
+  CHECK_EQ(stack.IsEmpty(), 1);
 }

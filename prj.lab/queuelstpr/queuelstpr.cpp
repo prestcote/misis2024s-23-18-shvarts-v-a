@@ -102,3 +102,19 @@ void QueueLstPr::Print() {
   }
   std::cout << std::endl;
 }
+
+QueueLstPr::QueueLstPr(QueueLstPr&& copy) {
+  head_ = copy.head_;
+  tail_ = copy.tail_;
+  copy.head_ = nullptr;
+  copy.tail_ = nullptr;
+}
+
+QueueLstPr& QueueLstPr::operator=(QueueLstPr&& copy) {
+  if (this != &copy) {
+    Clear();
+    std::swap(head_, copy.head_);
+    std::swap(tail_, copy.tail_);
+  }
+  return *this;
+}

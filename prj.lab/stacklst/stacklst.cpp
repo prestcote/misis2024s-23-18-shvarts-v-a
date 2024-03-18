@@ -160,3 +160,17 @@ const Complex& StackLst::Top() const {
   return head_->v;
 }
 
+StackLst::StackLst(StackLst&& copy) noexcept{
+  head_ = copy.head_;
+  copy.head_ = nullptr;
+}
+
+StackLst& StackLst::operator=(StackLst&& copy) noexcept {
+  if (this != &copy) {
+    Clear();
+    head_ = copy.head_;
+    copy.head_ = nullptr;
+  }
+  return *this;
+}
+

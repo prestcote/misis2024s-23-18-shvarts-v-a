@@ -12,9 +12,9 @@ public:
   QueueLst() = default;
   ~QueueLst() = default;
   QueueLst(const QueueLst&) = default; 
-  QueueLst(QueueLst&&) = default;
+  QueueLst(QueueLst&& copy);
   QueueLst& operator=(const QueueLst&) = default;
-  QueueLst& operator=(QueueLst&&) = default;
+  QueueLst& operator=(QueueLst&&);
 
   void Push(const Complex& new_element);
   void Pop() noexcept;

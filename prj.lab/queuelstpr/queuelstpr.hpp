@@ -9,9 +9,9 @@ class QueueLstPr {
 public:
   QueueLstPr() = default;
   QueueLstPr(const QueueLstPr& copy);
-  QueueLstPr(QueueLstPr&&) = default;
+  QueueLstPr(QueueLstPr&&);
   QueueLstPr& operator=(const QueueLstPr& copy);
-  QueueLstPr& operator=(QueueLstPr&&) = default;
+  QueueLstPr& operator=(QueueLstPr&&);
   ~QueueLstPr();
 
   float& Top();

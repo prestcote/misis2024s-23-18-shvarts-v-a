@@ -7,6 +7,8 @@
 StackArr::~StackArr() {
   if (data_) {
     delete[] data_;
+    head_ = 0;
+    size_ = 0;
   }
 } 
 
@@ -39,7 +41,7 @@ const Complex& StackArr::Top() const {
 }
 void StackArr::Pop() noexcept{
   if (head_ > -1) {
-    std::cout << *(data_ + head_);
+    //std::cout << *(data_ + head_);
     head_ -= 1;
   }
 }
@@ -76,31 +78,33 @@ void StackArr::Push(const Complex& new_element) {
 }
 
 StackArr& StackArr::operator=(const StackArr& copy) {
-  if (size_ == 0) {
-    size_ = copy.head_ + 1;
-    data_ = new Complex[size_];
-    head_ = copy.head_;
-    for (int i = 0; i < copy.size_; i++) {
-      data_[i] = copy.data_[i];
-    }
-  }
-  else {
-    if (size_ >= copy.size_) {
-      size_ = copy.size_;
+  if (this != &copy) {
+    if (size_ == 0) {
+      size_ = copy.head_ + 1;
+      data_ = new Complex[size_];
       head_ = copy.head_;
-      for (int i = 0; i < copy.size_; i++) {
+      for (int i = 0; i < size_; ++i) {
         data_[i] = copy.data_[i];
       }
     }
     else {
-      Complex* new_data = new Complex[copy.size_];
-      for (int i = 0; i < copy.size_; i++) {
-        new_data[i] = data_[i];
+      if (size_ >= copy.size_) {
+        size_ = copy.size_;
+        head_ = copy.head_;
+        for (int i = 0; i < copy.size_; i++) {
+          data_[i] = copy.data_[i];
+        }
       }
-      delete[] data_;
-      data_ = new_data;
-      size_ = copy.size_;
-      head_ = copy.head_;
+      else {
+        Complex* new_data = new Complex[copy.size_];
+        for (int i = 0; i < copy.size_; i++) {
+          new_data[i] = data_[i];
+        }
+        delete[] data_;
+        data_ = new_data;
+        size_ = copy.size_;
+        head_ = copy.head_;
+      }
     }
   }
   return (*this);
@@ -111,23 +115,25 @@ void StackArr::Clear() noexcept {
   size_ = 0;
 }
 
-StackArr::StackArr(StackArr&& copy) {
-  size_ = copy.size_;
-  head_ = copy.head_;
-  for (int i = 0; i < size_; ++i) {
-    data_[i] = copy.data_[i];
-  }
-  copy.data_ = nullptr;
-}
-
-StackArr& StackArr::operator=(StackArr&& copy) {
+StackArr::StackArr(StackArr&& copy) noexcept {
   if (this != &copy) {
     size_ = copy.size_;
     head_ = copy.head_;
-    for (int i = 0; i < size_; ++i) {
-      data_[i] = copy.data_[i];
-    }
+    data_ = copy.data_;
     copy.data_ = nullptr;
+    copy.size_ = 0;
+    copy.head_ = 0;
+  }
+}
+
+StackArr& StackArr::operator=(StackArr&& copy) noexcept{
+  if (this != &copy) {
+    size_ = copy.size_;
+    head_ = copy.head_;
+    data_ = copy.data_;
+    copy.data_ = nullptr;
+    copy.size_ = 0;
+    copy.head_ = 0;
   }
   return *this;
 }

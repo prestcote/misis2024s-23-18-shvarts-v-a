@@ -58,6 +58,24 @@ void QueueLst::Clear() noexcept {
     Pop();
   }
 }
+
+QueueLst::QueueLst(QueueLst&& copy) {
+  head_ = copy.head_;
+  tail_ = copy.tail_;
+  copy.head_ = nullptr;
+  copy.tail_ = nullptr;
+}
+
+QueueLst& QueueLst::operator=(QueueLst&& copy) {
+  if (this != &copy) {
+    Clear();
+    std::swap(tail_, copy.tail_);
+    std::swap(head_, copy.head_);
+  }
+  return *this;
+}
+
+
 /*
 QueueLst::~QueueLst() {
   Node* cur = head_;

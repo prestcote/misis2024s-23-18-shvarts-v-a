@@ -83,3 +83,165 @@ TEST_CASE("operator=") {
   q_copy = q1;
   CHECK_EQ(q_copy.IsEmpty(), true);
 }
+
+Complex c1(1, 2);
+Complex c2(2, 3);
+Complex c3(3, 4);
+
+TEST_CASE("generic check") {
+  QueueArr qa;
+  qa.Push(c1);
+  qa.Push(c2);
+  qa.Push(c3);
+  CHECK_EQ(c1, qa.Top());
+  qa.Pop();
+  CHECK_EQ(c2, qa.Top());
+  qa.Pop();
+  CHECK_EQ(c3, qa.Top());
+  qa.Pop();
+  CHECK(qa.IsEmpty());
+}
+
+TEST_CASE("COPY_CTOR") {
+  QueueArr qa;
+  qa.Push(c1);
+  qa.Push(c2);
+  qa.Push(c3);
+  QueueArr qac(qa);
+  CHECK_EQ(c1, qac.Top());
+  qac.Pop();
+  CHECK_EQ(c2, qac.Top());
+  qac.Pop();
+  CHECK_EQ(c3, qac.Top());
+  qac.Pop();
+  CHECK(qac.IsEmpty());
+}
+
+TEST_CASE("operator eq") {
+  QueueArr qa1;
+  qa1.Push(c1);
+  QueueArr qa2;
+  qa2.Push(c1);
+  qa2.Push(c2);
+  QueueArr qa3;
+  qa3.Push(c1);
+  qa3.Push(c2);
+  qa3.Push(c3);
+  QueueArr qa2_1;
+  qa2_1.Push(c1);
+  qa2_1.Push(c2);
+  QueueArr qa2_2;
+  qa2_2.Push(c1);
+  qa2_2.Push(c2);
+  QueueArr qa2_3;
+  qa2_3.Push(c1);
+  qa2_3.Push(c2);
+
+  qa2_1 = qa1;
+  qa2_2 = qa2;
+  qa2_3 = qa3;
+
+  CHECK_EQ(c1, qa2_1.Top());
+  qa2_1.Pop();
+  CHECK(qa2_1.IsEmpty());
+
+  CHECK_EQ(c1, qa2_2.Top());
+  qa2_2.Pop();
+  CHECK_EQ(c2, qa2_2.Top());
+  qa2_2.Pop();
+  CHECK(qa2_2.IsEmpty());
+
+  CHECK_EQ(c1, qa2_3.Top());
+  qa2_3.Pop();
+  CHECK_EQ(c2, qa2_3.Top());
+  qa2_3.Pop();
+  CHECK_EQ(c3, qa2_3.Top());
+  qa2_3.Pop();
+  CHECK(qa2_3.IsEmpty());
+}
+
+TEST_CASE("CLEAR CHECK") {
+  QueueArr qa;
+  CHECK(qa.IsEmpty());
+  qa.Push(c1);
+  CHECK_FALSE(qa.IsEmpty());
+  qa.Clear();
+  CHECK(qa.IsEmpty());
+}
+
+TEST_CASE("TOP THROW") {
+  QueueArr qa;
+  qa.Push(c1);
+  CHECK_NOTHROW((void)qa.Top());
+  qa.Pop();
+  CHECK_THROWS((void)qa.Top());
+}
+
+TEST_CASE("MOVE SEMANTICS") {
+  QueueArr qa_parent;
+  qa_parent.Push(c3);
+  qa_parent.Push(c3);
+  qa_parent.Push(c3);
+  qa_parent.Push(c2);
+  qa_parent.Push(c1);
+  QueueArr qa_0(qa_parent);
+
+  auto start_1{ std::chrono::steady_clock::now() };
+  QueueArr qa_1(qa_parent);
+  auto end_1{ std::chrono::steady_clock::now() };
+
+  auto start_2{ std::chrono::steady_clock::now() };
+  QueueArr qa_2(std::move(qa_parent));
+  auto end_2{ std::chrono::steady_clock::now() };
+
+  qa_parent = qa_0;
+  auto start_3{ std::chrono::steady_clock::now() };
+  QueueArr qa_3 = std::move(qa_parent);
+  auto end_3{ std::chrono::steady_clock::now() };
+
+  std::chrono::nanoseconds elapsed_1(end_1 - start_1);
+  std::chrono::nanoseconds elapsed_2(end_2 - start_2);
+  std::chrono::nanoseconds elapsed_3(end_3 - start_3);
+
+  // std::cout << elapsed_1 << ' ' << elapsed_2 << ' ' << elapsed_3;
+
+  CHECK_EQ(c3, qa_1.Top());
+  qa_1.Pop();
+  CHECK_EQ(c3, qa_1.Top());
+  qa_1.Pop();
+  CHECK_EQ(c3, qa_1.Top());
+  qa_1.Pop();
+  CHECK_EQ(c2, qa_1.Top());
+  qa_1.Pop();
+  CHECK_EQ(c1, qa_1.Top());
+  qa_1.Pop();
+  CHECK(qa_1.IsEmpty());
+
+  CHECK_EQ(c3, qa_2.Top());
+  qa_2.Pop();
+  CHECK_EQ(c3, qa_2.Top());
+  qa_2.Pop();
+  CHECK_EQ(c3, qa_2.Top());
+  qa_2.Pop();
+  CHECK_EQ(c2, qa_2.Top());
+  qa_2.Pop();
+  CHECK_EQ(c1, qa_2.Top());
+  qa_2.Pop();
+  CHECK(qa_2.IsEmpty());
+
+  CHECK_EQ(c3, qa_3.Top());
+  qa_3.Pop();
+  CHECK_EQ(c3, qa_3.Top());
+  qa_3.Pop();
+  CHECK_EQ(c3, qa_3.Top());
+  qa_3.Pop();
+  CHECK_EQ(c2, qa_3.Top());
+  qa_3.Pop();
+  CHECK_EQ(c1, qa_3.Top());
+  qa_3.Pop();
+  CHECK(qa_3.IsEmpty());
+
+
+  CHECK(elapsed_2 + std::chrono::nanoseconds(200) < elapsed_1);
+  CHECK(elapsed_3 + std::chrono::nanoseconds(200) < elapsed_1);
+}

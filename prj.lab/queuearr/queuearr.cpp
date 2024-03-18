@@ -3,19 +3,26 @@
 #include <cstdlib>
 #include <algorithm>
 
+QueueArr::~QueueArr() {
+  head_ = -1;
+  tail_ = -1;
+  size_ = 0;
+  data_ = nullptr;
+}
 QueueArr::QueueArr(const QueueArr& qu) { 
   if (!qu.IsEmpty()) {
     //size_ = (qu.tail_ + qu.size_ - qu.head_) % qu.size_ + 1;
     size_ = qu.Count();
     head_ = 0;
     tail_ = size_ - 1;
-    data_ = new Complex[size_];
+    //data_ = new Complex[size_];
+    data_.reset(new Complex[size_]);
     if (qu.head_ < qu.tail_) {
-      std::copy(qu.data_ + qu.head_, qu.data_ + qu.tail_ + 1, data_);
+      std::copy(qu.data_.get() + qu.head_, qu.data_.get() + qu.tail_ + 1, data_.get());
     }
     else {
-      std::copy(qu.data_ + qu.head_, qu.data_ + qu.size_ + 1, data_);
-      std::copy(qu.data_, qu.data_ + qu.tail_ + 1, data_ + qu.size_ - qu.head_);
+      std::copy(qu.data_.get() + qu.head_, qu.data_.get() + qu.size_ + 1, data_.get());
+      std::copy(qu.data_.get(), qu.data_.get() + qu.tail_ + 1, data_.get() + qu.size_ - qu.head_);
     }
   }
 }
@@ -28,23 +35,19 @@ QueueArr& QueueArr::operator=(const QueueArr& copy) {
       size_ = copy.Count();
       head_ = 0;
       tail_ = size_ - 1;
-      data_ = new Complex[size_];
-      if (copy.head_ < copy.tail_) {
-        std::copy(copy.data_ + copy.head_, copy.data_ + copy.tail_ + 1, data_);
-      }
-      else {
-        std::copy(copy.data_ + copy.head_, copy.data_ + copy.size_ + 1, data_);
-        std::copy(copy.data_, copy.data_ + copy.tail_ + 1, data_ + copy.size_ - copy.head_);
+      data_.reset(new Complex[size_]);
+      for (std::size_t i = 0; i < size_; ++i) {
+        data_[i] = copy.data_[(copy.head_ + i) % copy.size_];
       }
     }
-    return *this;
   }
+  return *this;
 }
 
 
 void QueueArr::Push(const Complex& val) {
   if (nullptr == data_) {
-    data_ = new Complex[1];
+    data_.reset(new Complex[1]);
     head_ = 0;
     tail_ = 0;
     size_ = 1;
@@ -52,14 +55,14 @@ void QueueArr::Push(const Complex& val) {
   else {
     if (head_ == (tail_ + 1) % size_) {
       std::ptrdiff_t new_size = size_ * 2;
-      Complex* new_data = new Complex[new_size];
+      //std::unique_ptr<Complex> new_data = std::make_unique<Complex>(new_size);
+      std::unique_ptr<Complex[]> new_data(new Complex[new_size]);
       std::ptrdiff_t count = Count();
       for (int i = 0; i < count; i++) {
-        //*(new_data + i) = (*this)[i];
-        new_data[i] = data_[(head_ + i) % size_];
+        //new_data[i] = data_[(head_ + i) % size_];
+        *(new_data.get() + i) = *(data_.get() + ((head_ + i) % size_));
       }
-      delete[] data_;
-      data_ = new_data;
+      data_.reset(new_data.release());
       size_ = new_size;
       head_ = 0;
       //tail_ = Count();
@@ -69,7 +72,8 @@ void QueueArr::Push(const Complex& val) {
       tail_ = (tail_ + 1) % size_;
     }
   }
-  data_[tail_] = val;
+  //data_[tail_] = val;
+  *(data_.get() + tail_) = val;
   counter += 1;
 }
 
@@ -98,21 +102,24 @@ Complex& QueueArr::Top() {
   if (head_ == -1) {
     throw std::logic_error("empty queue");
   }
-  return data_[head_];
+  //return data_[head_];
+  return *(data_.get() + head_);
 }
 
 const Complex& QueueArr::Top() const{
   if (head_ == -1) {
     throw std::logic_error("empty queue");
   }
-  return data_[head_];
+  //return data_[head_];
+  return *(data_.get() + head_);
 }
 
 Complex& QueueArr::Tail() {
   if (tail_ == -1) {
     throw std::logic_error("QueueLst - try get top form empty queue.");
   }
-  return data_[tail_];
+  //return data_[tail_];
+  return *(data_.get() + tail_);
 }
 
 bool QueueArr::IsEmpty() const noexcept {
@@ -121,6 +128,22 @@ bool QueueArr::IsEmpty() const noexcept {
 
 void QueueArr::Clear() noexcept {
   head_ = -1;
+  tail_ = -1;
 }
 
+QueueArr::QueueArr(QueueArr&& copy) {
+  tail_ = copy.tail_;
+  head_ = copy.head_;
+  size_ = copy.size_;
+  data_.reset(copy.data_.release());
+}
+
+QueueArr& QueueArr::operator=(QueueArr&& copy) {
+  if (this != &copy) {
+    std::swap(tail_, copy.tail_);
+    std::swap(head_, copy.head_);
+    std::swap(data_, copy.data_);
+  }
+  return *this;
+}
 
