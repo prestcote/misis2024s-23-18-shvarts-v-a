@@ -18,7 +18,7 @@ public:
   const float& Top() const;
   void Push(const float& new_element);
   void Pop() noexcept;
-  bool IsEmpty() noexcept;
+  bool IsEmpty() const noexcept;
   void Clear() noexcept;
 
   void Print();

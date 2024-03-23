@@ -15,7 +15,6 @@ QueueLstPr::~QueueLstPr() {
 }
 
 QueueLstPr::QueueLstPr(const QueueLstPr& copy) {
-  head_ = nullptr;
   Node* temp = copy.head_;
   while (temp != nullptr) {
     Push(temp->value);
@@ -35,7 +34,7 @@ QueueLstPr& QueueLstPr::operator=(const QueueLstPr& copy) {
   return *this;
 }
 
-bool QueueLstPr::IsEmpty() noexcept {
+bool QueueLstPr::IsEmpty() const noexcept {
   return head_ == nullptr;
 }
 
@@ -74,6 +73,7 @@ void QueueLstPr::Push(const float& new_element) {
   }
   else {
     head_ = new_node;
+    tail_ = new_node;
   }
 }
 
@@ -84,9 +84,14 @@ void QueueLstPr::Clear() noexcept {
 }
 
 void QueueLstPr::Pop() noexcept {
-  Node* cur = head_;
-  head_ = head_->next_;
-  delete cur;
+  if (head_ != nullptr) {
+    Node* cur = head_;
+    head_ = head_->next_;
+    delete cur;
+  }
+  else {
+    tail_ = nullptr;
+  }
 }
 
 void QueueLstPr::Print() {

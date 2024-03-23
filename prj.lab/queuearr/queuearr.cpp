@@ -12,7 +12,6 @@ QueueArr::~QueueArr() {
 }
 QueueArr::QueueArr(const QueueArr& qu) { 
   if (!qu.IsEmpty()) {
-    //size_ = (qu.tail_ + qu.size_ - qu.head_) % qu.size_ + 1;
     size_ = qu.Count();
     head_ = 0;
     tail_ = size_ - 1;

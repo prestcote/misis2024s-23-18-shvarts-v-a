@@ -59,17 +59,20 @@ void QueueLst::Clear() noexcept {
   }
 }
 
-QueueLst::QueueLst(QueueLst&& copy) {
+QueueLst::QueueLst(QueueLst&& copy) noexcept {
   head_ = copy.head_;
   tail_ = copy.tail_;
   copy.head_ = nullptr;
   copy.tail_ = nullptr;
 }
 
-QueueLst& QueueLst::operator=(QueueLst&& copy) {
+QueueLst& QueueLst::operator=(QueueLst&& copy) noexcept {
   if (this != &copy) {
-    std::swap(tail_, copy.tail_);
-    std::swap(head_, copy.head_);
+    Clear();
+    head_ = copy.head_;
+    tail_ = copy.tail_;
+    copy.head_ = nullptr;
+    copy.tail_ = nullptr;
   }
   return *this;
 }
