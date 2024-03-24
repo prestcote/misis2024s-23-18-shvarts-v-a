@@ -94,3 +94,4 @@ BitSet& BitSet::operator^=(const BitSet& rhs) {
   }
   return *this;
 }
+
