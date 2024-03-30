@@ -3,6 +3,30 @@
 #include <stdexcept>
 #include <cstdlib>
 
+QueueLst::QueueLst(const QueueLst& rhs) {
+  Node* cur = rhs.head_;
+  while (cur != nullptr) {
+    Push(cur->v);
+    cur = cur->next_;
+  }
+}
+
+QueueLst::~QueueLst() {
+  Clear();
+}
+
+QueueLst& QueueLst::operator=(const QueueLst& copy) {
+  if (this != &copy) {
+    Clear();
+    Node* cur = copy.head_;
+    while (cur != nullptr) {
+      Push(cur->v);
+      cur = cur->next_;
+    }
+  }
+  return *this;
+}
+
 void QueueLst::Push(const Complex& new_element) {
   Node* new_node = new Node;
   new_node->v = new_element;
@@ -59,9 +83,7 @@ void QueueLst::Clear() noexcept {
   }
 }
 
-QueueLst::QueueLst(QueueLst&& copy) noexcept {
-  head_ = copy.head_;
-  tail_ = copy.tail_;
+QueueLst::QueueLst(QueueLst&& copy) noexcept : head_(copy.head_), tail_(copy.tail_) {
   copy.head_ = nullptr;
   copy.tail_ = nullptr;
 }

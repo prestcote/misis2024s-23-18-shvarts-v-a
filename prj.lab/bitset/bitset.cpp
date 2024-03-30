@@ -146,7 +146,7 @@ bool BitSet::Get(const int32_t idx) const {
     throw std::logic_error("invalid index");
   }
   else {
-    return set_[idx];
+    return set_[idx / 32] & (1 << idx % 32);
   }
 }
 
@@ -155,7 +155,12 @@ void BitSet::Set(const int32_t idx, const bool value) {
     throw std::logic_error("invalid index");
   }
   else {
-    set_[idx] = value;
+    if (value) {
+      set_[idx / 32] |= (1 << (idx % 32));
+    }
+    else {
+      set_[idx / 32] &= ~(1 << (idx % 32));
+    }
   }
 }
 

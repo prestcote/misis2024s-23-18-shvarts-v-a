@@ -34,6 +34,7 @@ QueueLstPr& QueueLstPr::operator=(const QueueLstPr& copy) {
   return *this;
 }
 
+
 bool QueueLstPr::IsEmpty() const noexcept {
   return head_ == nullptr;
 }

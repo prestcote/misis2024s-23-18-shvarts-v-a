@@ -10,10 +10,10 @@ class QueueLst {
 public:
 
   QueueLst() = default;
-  ~QueueLst() = default;
-  QueueLst(const QueueLst&) = default; 
+  ~QueueLst();
+  QueueLst(const QueueLst&); 
   QueueLst(QueueLst&&) noexcept;
-  QueueLst& operator=(const QueueLst&) = default;
+  QueueLst& operator=(const QueueLst&);
   QueueLst& operator=(QueueLst&&) noexcept;
 
   void Push(const Complex& new_element);
