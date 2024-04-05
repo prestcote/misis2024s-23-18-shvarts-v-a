@@ -8,6 +8,7 @@ int main() {
   int c = 0;
   for (int i = 0; i < n; i++) {
     std::cin >> a >> b >> c;
+
     if (a < b && b < c) {
       std::cout << "STAIR" << std::endl;
     }
