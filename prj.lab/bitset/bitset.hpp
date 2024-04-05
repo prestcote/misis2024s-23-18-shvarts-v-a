@@ -40,7 +40,8 @@ public:
   void Print(); //attempt ig
 
   // ? operator[](const int32_t) - what can return
-  // why not bool....????????
+  // why not bool....???????? 
+  // ok get it ig
 // std::ostream& WriteTxt(std::ostream&)
 // std::ostream& WriteBinary(std::ostream&)
 // std::istream& ReadTxt(std::istream&)
