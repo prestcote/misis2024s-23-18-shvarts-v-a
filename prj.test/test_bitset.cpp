@@ -15,6 +15,8 @@ TEST_CASE("up we go") {
   BitSet b2(5);
   //b2.Fill(0);
   b2.Set(4, 1);
+
+
   //b2.Print();
   b2 ^= b1;
   //b2.Print();
