@@ -1,18 +1,21 @@
 week:1.05 - 7.05
+REPORT:
+- 
+- 6 tasks DONE!!!
+-
 
-PLAN:
-- реализовать оператор [] в битсете
-- разобраться с queuearr наконец-то (попробовать написать еще тесты, поискать ошибки)
-- codeforces (6 задач)
-- стэклист и кьюарр сломались
+TODO:
+- bitset: operator[]
+- codeforces (6 tasks)
+- stacklst queuearr crashed
 
 week: 25.04 - 31.04
 REPORT:
-- дописала get, set в битсете, не написала оператор [] 
-- перемещение в queuelst работает!!
-- не выполнено (но я решала отбор на исад на с++ честно); +3 на следующую неделю
+- bitset: get & set done; [] to do
+- queuelst move semantics works!!
+- codeforces: not done (но я решала отбор на исад на с++ честно); +3 next week
 
-PLAN:
-- переписать битсет
-- попробовать найти ошибки в реализации перемещения: queuelst
-- codeforces
+TODO:
+- redo bitset
+- redo queuelst move semantics
+- codeforces 3 tasks

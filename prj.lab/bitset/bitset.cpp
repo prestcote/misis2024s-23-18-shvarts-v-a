@@ -9,7 +9,7 @@ int32_t BitSet::GetSize() const noexcept {
 
 void BitSet::Resize(const int32_t size) {
   size_ = size;
-  set_.resize(size, 0);
+  set_.resize((size_ + 31)/32, 0);
 }
 
 BitSet::BitSet(const BitSet& copy) {
@@ -136,9 +136,8 @@ BitSet& BitSet::operator^(const BitSet& rhs) {
 }
 
 void BitSet::Fill(const bool val) noexcept {
-  for (int i = 0; i < size_; i++) {
-    set_[i] = val;
-  }
+  uint32_t value = val ? (~0) : 0;
+  std::fill(set_.begin(), set_.end(), value);
 }
 
 bool BitSet::Get(const int32_t idx) const {
