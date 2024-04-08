@@ -1,11 +1,14 @@
 week: 8.05 - 15.05
 REPORT:
+- codeforces: working
 - stacklst template: done for now
+- stacklst mistakes: found something? i think other parts should be fine
 
 TODO:
 - codeforces: 3 tasks
 - bitset: operator[]
 - stacklst template
+- stacklst: find some mistakes
 
 week:1.05 - 7.05
 REPORT:
