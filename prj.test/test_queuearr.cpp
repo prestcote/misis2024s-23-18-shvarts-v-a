@@ -102,6 +102,7 @@ TEST_CASE("generic check") {
   CHECK(qa.IsEmpty());
 }
 
+
 TEST_CASE("COPY_CTOR") {
   QueueArr qa;
   qa.Push(c1);
@@ -116,6 +117,7 @@ TEST_CASE("COPY_CTOR") {
   qac.Pop();
   CHECK(qac.IsEmpty());
 }
+
 
 TEST_CASE("operator eq") {
   QueueArr qa1;
@@ -169,6 +171,7 @@ TEST_CASE("CLEAR CHECK") {
   CHECK(qa.IsEmpty());
 }
 
+
 TEST_CASE("TOP THROW") {
   QueueArr qa;
   qa.Push(c1);
@@ -176,6 +179,7 @@ TEST_CASE("TOP THROW") {
   qa.Pop();
   CHECK_THROWS((void)qa.Top());
 }
+
 
 TEST_CASE("MOVE SEMANTICS") {
   QueueArr qa_parent;
@@ -185,20 +189,21 @@ TEST_CASE("MOVE SEMANTICS") {
   qa_parent.Push(c2);
   qa_parent.Push(c1);
   QueueArr qa_0(qa_parent);
+  
 
   auto start_1{ std::chrono::steady_clock::now() };
   QueueArr qa_1(qa_parent);
   auto end_1{ std::chrono::steady_clock::now() };
-
+  
   auto start_2{ std::chrono::steady_clock::now() };
   QueueArr qa_2(std::move(qa_parent));
   auto end_2{ std::chrono::steady_clock::now() };
-
+  
   qa_parent = qa_0;
   auto start_3{ std::chrono::steady_clock::now() };
   QueueArr qa_3 = std::move(qa_parent);
   auto end_3{ std::chrono::steady_clock::now() };
-
+  
   std::chrono::nanoseconds elapsed_1(end_1 - start_1);
   std::chrono::nanoseconds elapsed_2(end_2 - start_2);
   std::chrono::nanoseconds elapsed_3(end_3 - start_3);
@@ -244,4 +249,19 @@ TEST_CASE("MOVE SEMANTICS") {
 
   CHECK(elapsed_2 + std::chrono::nanoseconds(200) < elapsed_1);
   CHECK(elapsed_3 + std::chrono::nanoseconds(200) < elapsed_1);
+  
 }
+
+
+TEST_CASE("copy ctor + operator= are acting up") {
+  QueueArr q;
+  QueueArr a(q);
+  CHECK_EQ(a.IsEmpty(), true);
+  QueueArr b = q;
+  CHECK_EQ(b.IsEmpty(), true);
+  b.Push(Complex(1, 0));
+  b.Push(Complex(2, 0));
+  b.Push(Complex(3, 0));
+  b = q;
+  CHECK_EQ(b.IsEmpty(), true);
+} 

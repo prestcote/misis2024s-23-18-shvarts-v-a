@@ -44,35 +44,28 @@ StackLst::StackLst(const StackLst& copy) {
   }
 }
 
-
-/*
 StackLst& StackLst::operator=(const StackLst& copy) {
-  Clear();
-  head_ = nullptr;
-  StackLst new_list(copy);
-  return new_list;
-} */
-
-StackLst& StackLst::operator=(const StackLst& copy) {
-  if (copy.head_ != nullptr) {
+  if (this != &copy) {
     if (head_ != nullptr) {
       Clear();
     }
-    Node* new_head = copy.head_;
-    Node* present = copy.head_;
-    Node* first_node = new Node;
-    head_ = first_node;
-    new_head = first_node;
-    first_node->v = present->v;
-    present = present->next;
-    while (present != nullptr) {
-      Node* new_node = new Node;
-      new_node->v = present->v;
-      new_head->next = new_node;
+    if (copy.head_ != nullptr) {
+      Node* new_head = copy.head_;
+      Node* present = copy.head_;
+      Node* first_node = new Node;
+      head_ = first_node;
+      new_head = first_node;
+      first_node->v = present->v;
       present = present->next;
-      new_head = new_head->next;
+      while (present != nullptr) {
+        Node* new_node = new Node;
+        new_node->v = present->v;
+        new_head->next = new_node;
+        present = present->next;
+        new_head = new_head->next;
+      }
+      new_head->next = nullptr;
     }
-    new_head->next = nullptr;
   }
   return (*this);
 }

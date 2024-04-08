@@ -12,9 +12,9 @@ public:
   QueueArr() = default;;
   ~QueueArr();
   QueueArr(const QueueArr& copy);
-  QueueArr(QueueArr&& copy);
+  QueueArr(QueueArr&& copy) noexcept;
   QueueArr& operator=(const QueueArr& copy);
-  QueueArr& operator=(QueueArr&& copy);
+  QueueArr& operator=(QueueArr&& copy) noexcept;
 
   void Push(const Complex& new_element);
   void Pop() noexcept;

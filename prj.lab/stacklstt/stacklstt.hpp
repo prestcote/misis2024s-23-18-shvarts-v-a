@@ -85,10 +85,10 @@ StackLstT<T>::StackLstT(StackLstT&& copy) noexcept {
 
 template <typename T>
 StackLstT<T>& StackLstT<T>::operator=(const StackLstT& copy) {
+  if (head_ != nullptr) {
+    Clear();
+  }
   if (copy.head_ != nullptr) {
-    if (head_ != nullptr) {
-      Clear();
-    }
     Node* new_head = copy.head_;
     Node* present = copy.head_;
     Node* first_node = new Node;

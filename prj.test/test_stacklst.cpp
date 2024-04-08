@@ -116,3 +116,16 @@ TEST_CASE("push, pop, top, clear") {
   stack.Clear();
   CHECK_EQ(stack.IsEmpty(), 1);
 }
+
+TEST_CASE("i think the problem should be in copy ctor or operator=") {
+  StackLst a;
+  CHECK_EQ(a.IsEmpty(), true);
+  StackLst b(a);
+  CHECK_EQ(b.IsEmpty(), true);
+  StackLst c = a;
+  CHECK_EQ(c.IsEmpty(), true);
+  c.Push(Complex(1, 0));
+  c.Push(Complex(1, 1));
+  c = a;
+  CHECK_EQ(c.IsEmpty(), true);
+}

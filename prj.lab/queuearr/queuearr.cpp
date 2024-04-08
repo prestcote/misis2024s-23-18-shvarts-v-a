@@ -10,18 +10,19 @@ QueueArr::~QueueArr() {
   size_ = 0;
   data_ = nullptr;
 }
+
 QueueArr::QueueArr(const QueueArr& qu) { 
   if (!qu.IsEmpty()) {
-    size_ = qu.Count();
+    size_ = (qu.Count() + 4) / 4 * 4;
     head_ = 0;
-    tail_ = size_ - 1;
+    tail_ = qu.Count() - 1;
     //data_ = new Complex[size_];
-    data_.reset(new Complex[size_]);
+    data_ = std::make_unique<Complex[]>(size_);
     if (qu.head_ < qu.tail_) {
       std::copy(qu.data_.get() + qu.head_, qu.data_.get() + qu.tail_ + 1, data_.get());
     }
     else {
-      std::copy(qu.data_.get() + qu.head_, qu.data_.get() + qu.size_ + 1, data_.get());
+      std::copy(qu.data_.get() + qu.head_, qu.data_.get() + qu.size_, data_.get());
       std::copy(qu.data_.get(), qu.data_.get() + qu.tail_ + 1, data_.get() + qu.size_ - qu.head_);
     }
   }
@@ -31,13 +32,18 @@ QueueArr& QueueArr::operator=(const QueueArr& copy) {
   if (this != &copy) {
     Clear();
     if (!copy.IsEmpty()) {
-      //size_ = (qu.tail_ + qu.size_ - qu.head_) % qu.size_ + 1;
-      size_ = copy.Count();
       head_ = 0;
-      tail_ = size_ - 1;
-      data_.reset(new Complex[size_]);
-      for (std::size_t i = 0; i < size_; ++i) {
-        data_[i] = copy.data_[(copy.head_ + i) % copy.size_];
+      tail_ = copy.Count() - 1;
+      if (size_ < copy.Count()) {
+        size_ = (copy.Count() + 4) / 4 * 4;
+        data_ = std::make_unique<Complex[]>(size_);
+      }
+      if (copy.head_ < copy.tail_) {
+        std::copy(copy.data_.get() + copy.head_, copy.data_.get() + copy.tail_ + 1, data_.get());
+      }
+      else {
+        std::copy(copy.data_.get() + copy.head_, copy.data_.get() + copy.size_, data_.get());
+        std::copy(copy.data_.get(), copy.data_.get() + copy.tail_ + 1, data_.get() + copy.size_ - copy.head_);
       }
     }
   }
@@ -131,18 +137,21 @@ void QueueArr::Clear() noexcept {
   tail_ = -1;
 }
 
-QueueArr::QueueArr(QueueArr&& copy) {
+QueueArr::QueueArr(QueueArr&& copy) noexcept {
   tail_ = copy.tail_;
+  copy.tail_ = -1;
   head_ = copy.head_;
+  copy.head_ = -1;
   size_ = copy.size_;
-  data_.reset(copy.data_.release());
+  copy.size_ = 0;
+  data_ = std::move(copy.data_);
 }
 
-QueueArr& QueueArr::operator=(QueueArr&& copy) {
+QueueArr& QueueArr::operator=(QueueArr&& copy) noexcept {
   if (this != &copy) {
     std::swap(tail_, copy.tail_);
     std::swap(head_, copy.head_);
-    std::swap(data_, copy.data_);
+    data_ = std::move(copy.data_);
   }
   return *this;
 }
