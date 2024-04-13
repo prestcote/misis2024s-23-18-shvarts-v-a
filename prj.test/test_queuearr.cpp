@@ -2,10 +2,18 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
+
+TEST_CASE("one more time") {
+  QueueArr q;
+  CHECK(q.IsEmpty() == true);
+  CHECK(q.Size() == 0);
+}
 TEST_CASE("wellllll") {
   QueueArr s;
   s.Push(Complex(1, 1));
-  std::cout << s.Top() << s.Tail() << std::endl;
+  CHECK(s.IsEmpty() == false);
+  CHECK(s.Top() == Complex(1, 1));
+  CHECK(s.Tail() == Complex(1, 1));
   s.Push(Complex(1, 2));
   std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 3));
@@ -26,6 +34,8 @@ TEST_CASE("wellllll") {
   std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 11));
   std::cout << s.Top() << s.Tail() << std::endl;
+  s.Push(Complex(1, 12));
+  s.Push(Complex(1, 13));
 
 }
 

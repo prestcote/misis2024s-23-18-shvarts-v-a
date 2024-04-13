@@ -2,7 +2,7 @@ week: 8.05 - 15.05
 REPORT:
 - codeforces: working
 - stacklst template: done for now
-- stacklst mistakes: found something? i think other parts should be fine
+- stacklst mistakes: found something? i think other parts should be fine // upd. they are!!
 
 TODO:
 - codeforces: 3 tasks
