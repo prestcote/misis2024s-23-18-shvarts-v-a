@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <algorithm>
 
+
 QueueArr::QueueArr(const QueueArr& qu) { 
   if (!qu.IsEmpty()) {
     std::ptrdiff_t count = qu.Count();
@@ -22,16 +23,18 @@ QueueArr::QueueArr(const QueueArr& qu) {
   }
 }
 
+
+
 QueueArr& QueueArr::operator=(const QueueArr& copy) {
   if (this != &copy) {
     std::ptrdiff_t count = copy.Count();
     Clear();
     if (!copy.IsEmpty()) {
-      if (size_ < copy.Count()) {
-        size_ = (copy.Count() + 4) / 4 * 4;
+      if (size_ < count) {
+        size_ = (count + 4) / 4 * 4;
         data_ = std::make_unique<Complex[]>(size_);
       }
-      if (copy.head_ < copy.tail_) {
+      if (copy.head_ <= copy.tail_) {
         std::copy(copy.data_.get() + copy.head_, copy.data_.get() + copy.tail_ + 1, data_.get());
       }
       else {
@@ -56,7 +59,7 @@ void QueueArr::Push(const Complex& val) {
   else {
     if (head_ == (tail_ + 1) % size_) {
       auto new_data = std::make_unique<Complex[]>(size_ * 2);
-      if (head_ < tail_) {
+      if (head_ <= tail_) {
         std::copy(data_.get() + head_, data_.get() + tail_ + 1, new_data.get());
       }
       else {
@@ -72,7 +75,7 @@ void QueueArr::Push(const Complex& val) {
     }
   }
   data_[tail_] = val;
-}
+} 
 
 void QueueArr::Pop() noexcept {
   if (!IsEmpty()) {
@@ -85,7 +88,6 @@ void QueueArr::Pop() noexcept {
     //counter -= 1;
   }
 }
-
 
 std::ptrdiff_t QueueArr::Count() const {
   if (head_ == -1 || tail_ == -1) {
@@ -100,7 +102,7 @@ Complex& QueueArr::Top() {
     throw std::logic_error("empty queue");
   }
   //return data_[head_];
-  return *(data_.get() + head_);
+  return data_[head_];
 }
 
 const Complex& QueueArr::Top() const{
@@ -108,7 +110,7 @@ const Complex& QueueArr::Top() const{
     throw std::logic_error("empty queue");
   }
   //return data_[head_];
-  return *(data_.get() + head_);
+  return data_[head_];
 }
 
 Complex& QueueArr::Tail() {
@@ -139,10 +141,19 @@ QueueArr::QueueArr(QueueArr&& copy) noexcept {
 
 QueueArr& QueueArr::operator=(QueueArr&& copy) noexcept {
   if (this != &copy) {
-    std::swap(tail_, copy.tail_);
-    std::swap(head_, copy.head_);
+    size_ = copy.size_;
+    head_ = copy.head_;
+    tail_ = copy.tail_;
     data_ = std::move(copy.data_);
+
+    copy.size_ = 0;
+    copy.head_ = -1;
+    copy.tail_ = -1;
   }
   return *this;
 }
+
+
+
+                                              // SAY WHAT
 

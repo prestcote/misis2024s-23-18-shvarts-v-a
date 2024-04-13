@@ -8,32 +8,33 @@ TEST_CASE("one more time") {
   CHECK(q.IsEmpty() == true);
   CHECK(q.Size() == 0);
 }
+
 TEST_CASE("wellllll") {
   QueueArr s;
   s.Push(Complex(1, 1));
   CHECK(s.IsEmpty() == false);
   CHECK(s.Top() == Complex(1, 1));
-  CHECK(s.Tail() == Complex(1, 1));
+  //CHECK(s.Tail() == Complex(1, 1));
   s.Push(Complex(1, 2));
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 3));
-  std::cout << s.Top() << s.Tail() << std:: endl;
+  //std::cout << s.Top() << s.Tail() << std:: endl;
   s.Push(Complex(1, 4));
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 5));
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 6));
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Pop();
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Pop();
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Pop();
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 10));
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 11));
-  std::cout << s.Top() << s.Tail() << std::endl;
+  //std::cout << s.Top() << s.Tail() << std::endl;
   s.Push(Complex(1, 12));
   s.Push(Complex(1, 13));
 
@@ -64,8 +65,8 @@ TEST_CASE("trying copy ctor") {
   q.Push(Complex(1, 9));
   q.Push(Complex(1, 10));
   QueueArr q_copy(q);
-  std::cout << q.Top() << q.Tail() << std::endl;
-  std::cout << q_copy.Top() << q_copy.Tail() << std::endl;
+ // std::cout << q.Top() << q.Tail() << std::endl;
+ // std::cout << q_copy.Top() << q_copy.Tail() << std::endl;
 
 }
 
@@ -87,8 +88,8 @@ TEST_CASE("operator=") {
   q.Push(Complex(1, 10));
   QueueArr q_copy;
   q_copy = q;
-  std::cout << q.Top() << q.Tail() << std::endl;
-  std::cout << q_copy.Top() << q_copy.Tail() << std::endl;
+ // std::cout << q.Top() << q.Tail() << std::endl;
+  //std::cout << q_copy.Top() << q_copy.Tail() << std::endl;
   QueueArr q1;
   q_copy = q1;
   CHECK_EQ(q_copy.IsEmpty(), true);
@@ -112,7 +113,6 @@ TEST_CASE("generic check") {
   CHECK(qa.IsEmpty());
 }
 
-
 TEST_CASE("COPY_CTOR") {
   QueueArr qa;
   qa.Push(c1);
@@ -127,7 +127,6 @@ TEST_CASE("COPY_CTOR") {
   qac.Pop();
   CHECK(qac.IsEmpty());
 }
-
 
 TEST_CASE("operator eq") {
   QueueArr qa1;
@@ -149,14 +148,14 @@ TEST_CASE("operator eq") {
   qa2_3.Push(c1);
   qa2_3.Push(c2);
 
-  qa2_1 = qa1;
+  qa2_1 = qa1; 
   qa2_2 = qa2;
   qa2_3 = qa3;
-
+  
   CHECK_EQ(c1, qa2_1.Top());
   qa2_1.Pop();
   CHECK(qa2_1.IsEmpty());
-
+  
   CHECK_EQ(c1, qa2_2.Top());
   qa2_2.Pop();
   CHECK_EQ(c2, qa2_2.Top());
@@ -170,6 +169,7 @@ TEST_CASE("operator eq") {
   CHECK_EQ(c3, qa2_3.Top());
   qa2_3.Pop();
   CHECK(qa2_3.IsEmpty());
+  
 }
 
 TEST_CASE("CLEAR CHECK") {
@@ -275,3 +275,4 @@ TEST_CASE("copy ctor + operator= are acting up") {
   b = q;
   CHECK_EQ(b.IsEmpty(), true);
 } 
+

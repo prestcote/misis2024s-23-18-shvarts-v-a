@@ -8,55 +8,58 @@
 
 class BitSet {
 public:
-  BitSet() = default; //
-  BitSet(const std::int32_t size); //
-  ~BitSet() = default; //
-  BitSet(const BitSet&); //
-  BitSet(BitSet&&) noexcept; //
+  BitSet() = default;
+  BitSet(const int32_t size);
+  ~BitSet() = default;
+  BitSet(const BitSet&);
+  BitSet(BitSet&&) noexcept;
 
-  BitSet& operator=(const BitSet&); //
-  BitSet& operator=(BitSet&&) noexcept; //
+  BitSet& operator=(const BitSet&);
+  BitSet& operator=(BitSet&&) noexcept;
 
   int32_t GetSize() const noexcept;
-  void Resize(const int32_t size); //?
-  bool Get(const int32_t idx) const; //?
-  void Set(const int32_t idx, const bool value); //?
-  void Fill(const bool val) noexcept; //
+  void Resize(const int32_t size);
+  bool Get(const int32_t idx) const;
+  void Set(const int32_t idx, const bool value);
+  void Fill(const bool val) noexcept;
 
-  int32_t Size() const noexcept { return size_; } //
+  uint32_t Size() const noexcept {
+    return size_;
+  }
 
-  bool operator==(const BitSet& rhs) const noexcept; //
-  bool operator!=(const BitSet& rhs) const noexcept; //
+  bool operator==(const BitSet& rhs) const noexcept;
+  bool operator!=(const BitSet& rhs) const noexcept;
 
-  BitSet& operator&=(const BitSet&); //?
-  BitSet& operator|=(const BitSet&); //?
-  BitSet& operator~(); //
-  BitSet& operator^=(const BitSet&); //?
+  BitSet& operator&=(const BitSet&) ;
+  BitSet& operator|=(const BitSet&);
+  BitSet& operator~() const;
+  BitSet& operator^=(const BitSet&);
 
-  BitSet& operator&(const BitSet& rhs); //?
-  BitSet& operator|(const BitSet& rhs); //?
-  BitSet& operator^(const BitSet& rhs); //?
+  BitSet& operator&(const BitSet& rhs) const;
+  BitSet& operator|(const BitSet& rhs) const;
+  BitSet& operator^(const BitSet& rhs) const;
 
   void Print(); //attempt ig
 
   class BitSetAccess {
   private:
     uint32_t idx_;
-    BitSet& bitset_;
+    BitSet& bitset_; 
   public:
-    BitSetAccess(BitSet& bitset, uint32_t idx) : bitset_(bitset), idx_(idx) {};
-    BitSetAccess operator=(bool v) {
+    BitSetAccess(uint32_t idx, BitSet& bitset) : idx_(idx), bitset_(bitset) {};
+    BitSetAccess& operator=(bool v) {
       bitset_.Set(idx_, v);
       return *this;
     }
     operator bool() const {
       return bitset_.Get(idx_);
     }
+    
   };
-  /*
+  
   BitSetAccess operator[](const uint32_t index) {
-    return BitSetAccess(*this, index);
-  } */
+    return BitSetAccess(index, *this);
+  } 
 
   // ? operator[](const int32_t) - what can return
   // why not bool....???????? 
@@ -69,7 +72,10 @@ public:
 private:
   uint32_t size_ = 0;
   std::vector <uint32_t> set_;
-
 };
+
+BitSet& operator&(const BitSet& lhs, const BitSet& rhs);
+BitSet& operator|(const BitSet& lhs, const BitSet& rhs);
+BitSet& operator^(const BitSet& lhs, const BitSet& rhs);
 
 #endif
