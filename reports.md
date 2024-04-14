@@ -1,8 +1,9 @@
 week: 8.05 - 15.05
 REPORT:
-- codeforces: working
+- codeforces: done
 - stacklst template: done for now
 - stacklst mistakes: found something? i think other parts should be fine // upd. they are!!
+- bitset: get, set, fill remade, operator[] done(?)
 
 TODO:
 - codeforces: 3 tasks
