@@ -274,5 +274,9 @@ TEST_CASE("copy ctor + operator= are acting up") {
   b.Push(Complex(3, 0));
   b = q;
   CHECK_EQ(b.IsEmpty(), true);
+  QueueArr b1(b);
+  CHECK(b1.IsEmpty() == 1);
+  //CHECK(b1.Top() == Complex(1, 0));
+  CHECK_THROWS(b1.Top());
 } 
 
