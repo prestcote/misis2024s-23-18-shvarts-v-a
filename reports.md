@@ -1,4 +1,11 @@
-week: 8.05 - 15.05
+week: 15.05-21.05
+TODO:
+- codeforces: 3 tasks
+- template classes: queuelst queuearr stackarr
+- template unit tests
+- bitset io 
+
+week: 8.05 - 14.05
 REPORT:
 - codeforces: done
 - stacklst template: done for now
@@ -25,7 +32,7 @@ week: 25.04 - 31.04
 REPORT:
 - bitset: get & set done; [] to do
 - queuelst move semantics works!!
-- codeforces: not done (но я решала отбор на исад на с++ честно); +3 next week
+- codeforces: not done (Г­Г® Гї Г°ГҐГёГ Г«Г  Г®ГІГЎГ®Г° Г­Г  ГЁГ±Г Г¤ Г­Г  Г±++ Г·ГҐГ±ГІГ­Г®); +3 next week
 
 TODO:
 - redo bitset
