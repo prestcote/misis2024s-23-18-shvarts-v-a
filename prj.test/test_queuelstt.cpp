@@ -135,6 +135,6 @@ TEST_CASE("MOVE SEMANTICS") {
   CHECK(ql_3.IsEmpty());
 
 
-  CHECK(elapsed_2 + std::chrono::nanoseconds(200) < elapsed_1);
-  CHECK(elapsed_3 + std::chrono::nanoseconds(200) < elapsed_1);
+  CHECK(elapsed_2 + std::chrono::nanoseconds(300) < elapsed_1);
+  CHECK(elapsed_3 + std::chrono::nanoseconds(300) < elapsed_1);
 }
