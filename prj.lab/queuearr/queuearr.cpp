@@ -28,8 +28,10 @@ QueueArr::QueueArr(const QueueArr& qu) {
 QueueArr& QueueArr::operator=(const QueueArr& copy) {
   if (this != &copy) {
     std::ptrdiff_t count = copy.Count();
-    Clear();
-    if (!copy.IsEmpty()) {
+    if (count == 0) {
+      head_ -= 1;
+    }
+    else {
       if (size_ < count) {
         size_ = (count + 4) / 4 * 4;
         data_ = std::make_unique<Complex[]>(size_);
@@ -51,10 +53,12 @@ QueueArr& QueueArr::operator=(const QueueArr& copy) {
 
 void QueueArr::Push(const Complex& val) {
   if (nullptr == data_) {
-    head_ = 0;
-    tail_ = 0;
     size_ = 2;
     data_ = std::make_unique<Complex[]>(size_);
+  }
+  if (IsEmpty()) {
+    head_ = 0;
+    tail_ = 0;
   }
   else {
     if (head_ == (tail_ + 1) % size_) {

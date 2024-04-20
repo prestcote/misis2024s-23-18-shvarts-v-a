@@ -1,11 +1,12 @@
 week: 15.05-21.05
 REPORT:
 - template classes done
-- 
+- codeforces done
+- template unit tests: stacklstt stackarr done 
 
 TODO:
 - codeforces: 3 tasks
-- template classes: queuelst queuearr stackarr 
+- template classes: queuelst queuearr stackarr stacklst
 - template unit tests
 - bitset io 
 

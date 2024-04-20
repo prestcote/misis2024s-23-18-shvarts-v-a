@@ -52,6 +52,13 @@ add_executable(test_queuearrt test_queuearrt.cpp)
 target_link_libraries(test_queuearrt queuearr)
 target_link_libraries(test_queuearrt complex)
 
+add_library(vector INTERFACE vector.hpp)
+set_property(TARGET vector PROPERTY CXX_STANDARD 20)
+target_include_directories(vector INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+  $<INSTALL_INTERFACE:include>
+)
+
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_complex)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_rational)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT test_dynarr)
