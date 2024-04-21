@@ -18,6 +18,7 @@ public:
   T& Top();
   const T& Top() const;
   void Push(const T& new_element);
+
   void Pop() noexcept;
   bool IsEmpty() const noexcept;
   void Clear() noexcept;

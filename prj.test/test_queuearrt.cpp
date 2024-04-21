@@ -72,14 +72,14 @@ TEST_CASE_TEMPLATE("operator=", T, int, double, std::string, Complex, Rational) 
     CHECK_EQ(q.Tail(), vector[i]);
   }
   for (int i = 0; i < 4; i++) {
-    q.Pop();
     CHECK_EQ(q.Top(), vector[i]);
+    q.Pop();
   }
   q.Push(vector[8]);
   q.Push(vector[9]);
   QueueArrT<T> q_copy(q);
   CHECK_EQ(q_copy.IsEmpty(), false);
-  CHECK_EQ(q_copy.Top(), vector[3]);
+  CHECK_EQ(q_copy.Top(), vector[4]);
   CHECK_EQ(q_copy.Tail(), vector[9]);
 
   QueueArrT<T> q1;
@@ -106,7 +106,7 @@ TEST_CASE_TEMPLATE("generic check", T, int, double, std::string, Complex, Ration
   CHECK(qa.IsEmpty());
 }
 
-TEST_CASE_TEMPLATE("COPY_CTOR", T, int, double, Complex, Rational) {
+TEST_CASE_TEMPLATE("COPY_CTOR", T, int, double, std::string,  Complex, Rational) {
   std::vector <T> vector = make_vector<T>();
   T c1(vector[0]);
   T c2(vector[1]);

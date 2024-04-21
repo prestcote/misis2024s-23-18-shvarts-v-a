@@ -64,8 +64,10 @@ template <typename T>
 QueueArrT<T>& QueueArrT<T>::operator=(const QueueArrT& copy) {
   if (this != &copy) {
     std::ptrdiff_t count = copy.Count();
-    Clear();
-    if (!copy.IsEmpty()) {
+    if (count == 0) {
+      head_ -= 1;
+    }
+    else {
       if (size_ < count) {
         size_ = (count + 4) / 4 * 4;
         data_ = std::make_unique<T[]>(size_);
@@ -88,7 +90,7 @@ template <typename T>
 void QueueArrT<T>::Push(const T& val) {
   if (nullptr == data_) {
     size_ = 2;
-    data_ = std::make_unique<Complex[]>(size_);
+    data_ = std::make_unique<T[]>(size_);
   }
   if (IsEmpty()) {
     head_ = 0;
