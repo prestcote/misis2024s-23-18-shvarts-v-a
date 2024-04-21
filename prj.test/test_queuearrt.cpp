@@ -1,107 +1,99 @@
 #include <queuearrt/queuearrt.hpp>
-#include <complex/complex.hpp>
+#include "vector.hpp"
+//#include <complex/complex.hpp>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
 
-TEST_CASE("one more time") {
-  QueueArrT<Complex> q;
+TEST_CASE_TEMPLATE("one more time", T, int, double, std::string, Complex, Rational) {
+  QueueArrT<T> q;
   CHECK(q.IsEmpty() == true);
   CHECK(q.Size() == 0);
 }
 
-TEST_CASE("wellllll") {
-  QueueArrT<Complex> s;
-  s.Push(Complex(1, 1));
-  CHECK(s.IsEmpty() == false);
-  CHECK(s.Top() == Complex(1, 1));
-  //CHECK(s.Tail() == Complex(1, 1));
-  s.Push(Complex(1, 2));
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Push(Complex(1, 3));
-  //std::cout << s.Top() << s.Tail() << std:: endl;
-  s.Push(Complex(1, 4));
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Push(Complex(1, 5));
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Push(Complex(1, 6));
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Pop();
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Pop();
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Pop();
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Push(Complex(1, 10));
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Push(Complex(1, 11));
-  //std::cout << s.Top() << s.Tail() << std::endl;
-  s.Push(Complex(1, 12));
-  s.Push(Complex(1, 13));
-
+TEST_CASE_TEMPLATE("wellllll", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  
+  QueueArrT<T> s;
+  CHECK(s.IsEmpty() == true);
+  CHECK_THROWS(s.Top());
+  for (int i = 0; i < vector.size(); i++) {
+    s.Push(vector[i]);
+    CHECK(s.Top() == vector[0]);
+    CHECK(s.Tail() == vector[i]);
+  }
+  for (int i = vector.size() - 1; i >= 0; i--) {
+    //std::cout << vector[vector.size() - 1 - i] << ' ' << s.Top() << std::endl;
+    CHECK_EQ(s.Top(), vector[vector.size() - 1 - i]);
+    CHECK_EQ(s.Tail(), vector[vector.size() - 1]);
+    s.Pop();
+  }
 }
 
-TEST_CASE("trying unique ptr") {
-  QueueArrT<Complex> q;
+TEST_CASE_TEMPLATE("trying unique ptr", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+
+  QueueArrT<T> q;
   CHECK_EQ(q.IsEmpty(), true);
-  q.Push(Complex(1, 1));
-  std::cout << q.Top() << std::endl;
-  std::cout << std::endl;
+  q.Push(vector[0]);
+  CHECK_EQ(vector[0], q.Top());
 }
 
-TEST_CASE("trying copy ctor") {
-  QueueArrT<Complex> q;
-  q.Push(Complex(1, 1));
-  q.Push(Complex(1, 2));
-  q.Push(Complex(1, 3));
-  q.Push(Complex(1, 4));
-  q.Push(Complex(1, 5));
-  q.Push(Complex(1, 6));
-  q.Push(Complex(1, 7));
-  q.Push(Complex(1, 8));
-  q.Pop();
-  q.Pop();
-  q.Pop();
-  q.Pop();
-  q.Push(Complex(1, 9));
-  q.Push(Complex(1, 10));
-  QueueArrT<Complex> q_copy(q);
- // std::cout << q.Top() << q.Tail() << std::endl;
- // std::cout << q_copy.Top() << q_copy.Tail() << std::endl;
+TEST_CASE_TEMPLATE("trying copy ctor", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  
+  QueueArrT<T> q;
+  for (int i = 0; i < 8; i++) {
+    q.Push(vector[i]);
+    //std::cout << q.Tail() << ' ' << vector[i] << ' ' << q.Top() << std::endl;
+    CHECK_EQ(q.Tail(), vector[i]);
+  }
+  for (int i = 0; i < 4; i++) {
+    CHECK_EQ(q.Top(), vector[i]);
+    //std::cout << q.Tail() << ' ' << vector[i] << ' ' << q.Top() << std::endl;
+    q.Pop();
+  }
+  //std::cout << q.Tail() << ' ' << q.Top() << std::endl;
+  q.Push(vector[8]);
+  q.Push(vector[9]);
+  QueueArrT<T> q_copy(q);
+  CHECK_EQ(q_copy.IsEmpty(), false);
+  CHECK_EQ(q_copy.Top(), vector[4]);
+  CHECK_EQ(q_copy.Tail(), vector[9]);
 
 }
 
-TEST_CASE("operator=") {
-  QueueArrT<Complex> q;
-  q.Push(Complex(1, 1));
-  q.Push(Complex(1, 2));
-  q.Push(Complex(1, 3));
-  q.Push(Complex(1, 4));
-  q.Push(Complex(1, 5));
-  q.Push(Complex(1, 6));
-  q.Push(Complex(1, 7));
-  q.Push(Complex(1, 8));
-  q.Pop();
-  q.Pop();
-  q.Pop();
-  q.Pop();
-  q.Push(Complex(1, 9));
-  q.Push(Complex(1, 10));
-  QueueArrT<Complex> q_copy;
-  q_copy = q;
- // std::cout << q.Top() << q.Tail() << std::endl;
-  //std::cout << q_copy.Top() << q_copy.Tail() << std::endl;
-  QueueArrT<Complex> q1;
+TEST_CASE_TEMPLATE("operator=", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+
+  QueueArrT<T> q;
+  for (int i = 0; i < 8; i++) {
+    q.Push(vector[i]);
+    CHECK_EQ(q.Tail(), vector[i]);
+  }
+  for (int i = 0; i < 4; i++) {
+    q.Pop();
+    CHECK_EQ(q.Top(), vector[i]);
+  }
+  q.Push(vector[8]);
+  q.Push(vector[9]);
+  QueueArrT<T> q_copy(q);
+  CHECK_EQ(q_copy.IsEmpty(), false);
+  CHECK_EQ(q_copy.Top(), vector[3]);
+  CHECK_EQ(q_copy.Tail(), vector[9]);
+
+  QueueArrT<T> q1;
   q_copy = q1;
   CHECK_EQ(q_copy.IsEmpty(), true);
 }
 
-Complex c1(1, 2);
-Complex c2(2, 3);
-Complex c3(3, 4);
+TEST_CASE_TEMPLATE("generic check", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  T c1(vector[0]);
+  T c2(vector[1]);
+  T c3(vector[2]);
 
-TEST_CASE("generic check") {
-  QueueArrT<Complex> qa;
+  QueueArrT<T> qa;
   qa.Push(c1);
   qa.Push(c2);
   qa.Push(c3);
@@ -114,12 +106,17 @@ TEST_CASE("generic check") {
   CHECK(qa.IsEmpty());
 }
 
-TEST_CASE("COPY_CTOR") {
-  QueueArrT<Complex> qa;
+TEST_CASE_TEMPLATE("COPY_CTOR", T, int, double, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  T c1(vector[0]);
+  T c2(vector[1]);
+  T c3(vector[2]);
+
+  QueueArrT<T> qa;
   qa.Push(c1);
   qa.Push(c2);
   qa.Push(c3);
-  QueueArrT<Complex> qac(qa);
+  QueueArrT<T> qac(qa);
   CHECK_EQ(c1, qac.Top());
   qac.Pop();
   CHECK_EQ(c2, qac.Top());
@@ -129,23 +126,28 @@ TEST_CASE("COPY_CTOR") {
   CHECK(qac.IsEmpty());
 }
 
-TEST_CASE("operator eq") {
-  QueueArrT<Complex> qa1;
+TEST_CASE_TEMPLATE("operator eq", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  T c1(vector[0]);
+  T c2(vector[1]);
+  T c3(vector[2]);
+
+  QueueArrT<T> qa1;
   qa1.Push(c1);
-  QueueArrT<Complex> qa2;
+  QueueArrT<T> qa2;
   qa2.Push(c1);
   qa2.Push(c2);
-  QueueArrT<Complex> qa3;
+  QueueArrT<T> qa3;
   qa3.Push(c1);
   qa3.Push(c2);
   qa3.Push(c3);
-  QueueArrT<Complex> qa2_1;
+  QueueArrT<T> qa2_1;
   qa2_1.Push(c1);
   qa2_1.Push(c2);
-  QueueArrT<Complex> qa2_2;
+  QueueArrT<T> qa2_2;
   qa2_2.Push(c1);
   qa2_2.Push(c2);
-  QueueArrT<Complex> qa2_3;
+  QueueArrT<T> qa2_3;
   qa2_3.Push(c1);
   qa2_3.Push(c2);
 
@@ -173,8 +175,13 @@ TEST_CASE("operator eq") {
   
 }
 
-TEST_CASE("CLEAR CHECK") {
-  QueueArrT<Complex> qa;
+TEST_CASE_TEMPLATE("CLEAR CHECK", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  T c1(vector[0]);
+  T c2(vector[1]);
+  T c3(vector[2]);
+
+  QueueArrT<T> qa;
   CHECK(qa.IsEmpty());
   qa.Push(c1);
   CHECK_FALSE(qa.IsEmpty());
@@ -183,8 +190,13 @@ TEST_CASE("CLEAR CHECK") {
 }
 
 
-TEST_CASE("TOP THROW") {
-  QueueArrT<Complex> qa;
+TEST_CASE_TEMPLATE("TOP THROW", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  T c1(vector[0]);
+  T c2(vector[1]);
+  T c3(vector[2]);
+  
+  QueueArrT<T> qa;
   qa.Push(c1);
   CHECK_NOTHROW((void)qa.Top());
   qa.Pop();
@@ -192,27 +204,27 @@ TEST_CASE("TOP THROW") {
 }
 
 
-TEST_CASE("MOVE SEMANTICS") {
-  QueueArrT<Complex> qa_parent;
+TEST_CASE_TEMPLATE("MOVE SEMANTICS") {
+  QueueArrT<T> qa_parent;
   qa_parent.Push(c3);
   qa_parent.Push(c3);
   qa_parent.Push(c3);
   qa_parent.Push(c2);
   qa_parent.Push(c1);
-  QueueArrT<Complex> qa_0(qa_parent);
+  QueueArrT<T> qa_0(qa_parent);
   
 
   auto start_1{ std::chrono::steady_clock::now() };
-  QueueArrT<Complex> qa_1(qa_parent);
+  QueueArrT<T> qa_1(qa_parent);
   auto end_1{ std::chrono::steady_clock::now() };
   
   auto start_2{ std::chrono::steady_clock::now() };
-  QueueArrT<Complex> qa_2(std::move(qa_parent));
+  QueueArrT<T> qa_2(std::move(qa_parent));
   auto end_2{ std::chrono::steady_clock::now() };
   
   qa_parent = qa_0;
   auto start_3{ std::chrono::steady_clock::now() };
-  QueueArrT<Complex> qa_3 = std::move(qa_parent);
+  QueueArrT<T> qa_3 = std::move(qa_parent);
   auto end_3{ std::chrono::steady_clock::now() };
   
   std::chrono::nanoseconds elapsed_1(end_1 - start_1);
@@ -264,20 +276,26 @@ TEST_CASE("MOVE SEMANTICS") {
 }
 
 
-TEST_CASE("copy ctor + operator= are acting up") {
-  QueueArrT<Complex> q;
-  QueueArrT<Complex> a(q);
+TEST_CASE_TEMPLATE("copy ctor + operator= are acting up", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector = make_vector<T>();
+  T c1(vector[0]);
+  T c2(vector[1]);
+  T c3(vector[2]);
+  
+  QueueArrT<T> q;
+  QueueArrT<T> a(q);
   CHECK_EQ(a.IsEmpty(), true);
-  QueueArrT<Complex> b = q;
+  QueueArrT<T> b = q;
   CHECK_EQ(b.IsEmpty(), true);
-  b.Push(Complex(1, 0));
-  b.Push(Complex(2, 0));
-  b.Push(Complex(3, 0));
+  b.Push(c1);
+  b.Push(c2);
+  b.Push(c3);
   b = q;
   CHECK_EQ(b.IsEmpty(), true);
-  QueueArrT<Complex> b1(b);
+  QueueArrT<T> b1(b);
   CHECK(b1.IsEmpty() == 1);
-  //CHECK(b1.Top() == Complex(1, 0));
+  //CHECK(b1.Top() == T(1, 0));
   CHECK_THROWS(b1.Top());
 } 
+
 

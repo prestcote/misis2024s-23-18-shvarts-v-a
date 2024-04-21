@@ -87,10 +87,12 @@ QueueArrT<T>& QueueArrT<T>::operator=(const QueueArrT& copy) {
 template <typename T>
 void QueueArrT<T>::Push(const T& val) {
   if (nullptr == data_) {
+    size_ = 2;
+    data_ = std::make_unique<Complex[]>(size_);
+  }
+  if (IsEmpty()) {
     head_ = 0;
     tail_ = 0;
-    size_ = 2;
-    data_ = std::make_unique<T[]>(size_);
   }
   else {
     if (head_ == (tail_ + 1) % size_) {
@@ -180,7 +182,7 @@ QueueArrT<T>::QueueArrT(QueueArrT&& copy) noexcept {
   copy.head_ = -1;
   size_ = copy.size_;
   copy.size_ = 0;
-  data_ = std::move(copy.data_);
+  data_ = std::forward(copy.data_);
 }
 
 template <typename T>
@@ -189,7 +191,7 @@ QueueArrT<T>& QueueArrT<T>::operator=(QueueArrT&& copy) noexcept {
     size_ = copy.size_;
     head_ = copy.head_;
     tail_ = copy.tail_;
-    data_ = std::move(copy.data_);
+    data_ = std::forward(copy.data_);
 
     copy.size_ = 0;
     copy.head_ = -1;
