@@ -2,7 +2,7 @@ week: 15.05-21.05
 REPORT:
 - template classes done
 - codeforces done
-- template unit tests: stacklstt stackarr done 
+- template unit tests done 
 
 TODO:
 - codeforces: 3 tasks
