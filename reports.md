@@ -1,4 +1,21 @@
-week: 15.05-21.05
+week: 21.05 - 28.05
+REPORT:
+- codeforces done
+- template unit tests done
+- vector library done
+- queuearr is working
+- time tests - i did something??
+- reading documentation is HARD and i am STUPID 
+
+TODO:
+- codeforces 3 tasks
+- template unit tests
+- vector library for tests
+- queuearr
+- time tests for queuearr and queuelst libraries
+- read smth about data visualization for time tests 
+
+week: 15.05-20.05
 REPORT:
 - template classes done
 - codeforces done
