@@ -13,7 +13,8 @@ TEST_CASE_TEMPLATE("default ctor", T, int, double, std::string, Complex, Rationa
 }
 
 TEST_CASE_TEMPLATE("push method", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
 
   QueueLstT<T> q;
   CHECK_EQ(q.IsEmpty(), true);
@@ -41,7 +42,8 @@ TEST_CASE_TEMPLATE("push method", T, int, double, std::string, Complex, Rational
 }
 
 TEST_CASE_TEMPLATE("copy ctor", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   
   QueueLstT<T> q;
   QueueLstT<T> q_copy(q);
@@ -58,7 +60,8 @@ TEST_CASE_TEMPLATE("copy ctor", T, int, double, std::string, Complex, Rational) 
 }
 
 TEST_CASE_TEMPLATE("operator=", T, int, double, std::string, Complex, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   
   QueueLstT<T> q;
   QueueLstT<T> q_copy = q;
@@ -75,7 +78,8 @@ TEST_CASE_TEMPLATE("operator=", T, int, double, std::string, Complex, Rational) 
 }
 
 TEST_CASE_TEMPLATE("MOVE SEMANTICS", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);

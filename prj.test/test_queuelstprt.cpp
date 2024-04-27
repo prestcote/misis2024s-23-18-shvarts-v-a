@@ -5,7 +5,8 @@
 //#include <complex/complex.hpp>
 
 TEST_CASE_TEMPLATE("were going down", T, int, double,  std::string, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
 
   QueueLstPrT<T> q;
   CHECK_EQ(q.IsEmpty(), 1);
@@ -21,7 +22,8 @@ TEST_CASE_TEMPLATE("were going down", T, int, double,  std::string, Rational) {
 }
 
 TEST_CASE_TEMPLATE("generic test 0", T, int, double, std::string, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(5, vector);
   T c1 = vector[3]; 
   T c2 = vector[1]; 
   T c3 = vector[2]; 
@@ -40,10 +42,12 @@ TEST_CASE_TEMPLATE("generic test 0", T, int, double, std::string, Rational) {
   CHECK_EQ(qlp.Top(), c1);
   qlp.Pop();
   CHECK(qlp.IsEmpty());
+  
 }
 
 TEST_CASE_TEMPLATE("copy_ctor", T, int, double, std::string, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3]; 
   T c2 = vector[1]; 
   T c3 = vector[2]; 
@@ -72,7 +76,8 @@ TEST_CASE_TEMPLATE("copy_ctor", T, int, double, std::string, Rational) {
 }
 
 TEST_CASE_TEMPLATE("copy_ctor 2", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3];
   T c2 = vector[1];
   T c3 = vector[2];
@@ -111,7 +116,8 @@ TEST_CASE_TEMPLATE("copy_ctor 2", T, int, double, std::string, Rational) {
 }
 
 TEST_CASE_TEMPLATE("eq_ctor", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3];
   T c2 = vector[1];
   T c3 = vector[2];
@@ -140,10 +146,11 @@ TEST_CASE_TEMPLATE("eq_ctor", T, int, double, std::string, Rational) {
 }
 
 TEST_CASE_TEMPLATE("eq ctor 2", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
-  T c1 = vector[3]; //35r
-  T c2 = vector[1]; //-1300
-  T c3 = vector[2]; //c3
+  std::vector <T> vector;
+  make_vector(10, vector);
+  T c1 = vector[3]; 
+  T c2 = vector[1]; 
+  T c3 = vector[2]; 
 
   QueueLstPrT<T> qlp;
   qlp.Push(c3);
@@ -179,7 +186,8 @@ TEST_CASE_TEMPLATE("eq ctor 2", T, int, double, std::string, Rational) {
 }
 
 TEST_CASE_TEMPLATE("generic test 1", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3]; 
   T c2 = vector[1]; 
   T c3 = vector[2]; 
@@ -199,7 +207,8 @@ TEST_CASE_TEMPLATE("generic test 1", T, int, double, std::string, Rational) {
 }
 
 TEST_CASE_TEMPLATE("generic test 1 (five elems)", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3];
   T c2 = vector[1];
   T c3 = vector[2];
@@ -225,7 +234,8 @@ TEST_CASE_TEMPLATE("generic test 1 (five elems)", T, int, double, std::string, R
 }
 
 TEST_CASE_TEMPLATE("generic test 2 (chain to right side)", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3];
   T c2 = vector[1];
   T c3 = vector[2];
@@ -246,7 +256,8 @@ TEST_CASE_TEMPLATE("generic test 2 (chain to right side)", T, int, double, std::
 }
 
 TEST_CASE_TEMPLATE("generic test 3 (chain to left side)", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3];
   T c2 = vector[1];
   T c3 = vector[2]; 
@@ -266,7 +277,8 @@ TEST_CASE_TEMPLATE("generic test 3 (chain to left side)", T, int, double, std::s
 }
 
 TEST_CASE_TEMPLATE("generic test 4 (same elems)", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3];
   T c2 = vector[1];
   T c3 = vector[2]; 
@@ -292,7 +304,8 @@ TEST_CASE_TEMPLATE("generic test 4 (same elems)", T, int, double, std::string, R
 }
 
 TEST_CASE_TEMPLATE("MOVE SEMANTICS", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1 = vector[3];
   T c2 = vector[1]; 
   T c3 = vector[2];
@@ -366,7 +379,8 @@ TEST_CASE_TEMPLATE("MOVE SEMANTICS", T, int, double, std::string, Rational) {
 }
 
 TEST_CASE_TEMPLATE("QueueLstPrT<T> constructors", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
 
   QueueLstPrT<T> queue;
   CHECK(queue.IsEmpty());
@@ -384,7 +398,8 @@ TEST_CASE_TEMPLATE("QueueLstPrT<T> constructors", T, int, double, std::string, R
 }
 
 TEST_CASE_TEMPLATE("QueueLstPrT<T> - IsEmpty", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   QueueLstPrT<T> queue;
   CHECK(queue.IsEmpty());
   queue.Push(vector[1]);
@@ -394,7 +409,8 @@ TEST_CASE_TEMPLATE("QueueLstPrT<T> - IsEmpty", T, int, double, std::string, Rati
 }
 
 TEST_CASE_TEMPLATE("QueueLstPrT<T> - right order", T, int, double, std::string, Rational) {
-  std::vector<T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
 
   QueueLstPrT<T> queue;
   queue.Push(vector[1]);

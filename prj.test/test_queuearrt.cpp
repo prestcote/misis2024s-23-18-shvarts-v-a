@@ -12,7 +12,8 @@ TEST_CASE_TEMPLATE("one more time", T, int, double, std::string, Complex, Ration
 }
 
 TEST_CASE_TEMPLATE("wellllll", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   
   QueueArrT<T> s;
   CHECK(s.IsEmpty() == true);
@@ -31,7 +32,8 @@ TEST_CASE_TEMPLATE("wellllll", T, int, double, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("trying unique ptr", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
 
   QueueArrT<T> q;
   CHECK_EQ(q.IsEmpty(), true);
@@ -40,7 +42,8 @@ TEST_CASE_TEMPLATE("trying unique ptr", T, int, double, std::string, Complex, Ra
 }
 
 TEST_CASE_TEMPLATE("trying copy ctor", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   
   QueueArrT<T> q;
   for (int i = 0; i < 8; i++) {
@@ -64,7 +67,8 @@ TEST_CASE_TEMPLATE("trying copy ctor", T, int, double, std::string, Complex, Rat
 }
 
 TEST_CASE_TEMPLATE("operator=", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
 
   QueueArrT<T> q;
   for (int i = 0; i < 8; i++) {
@@ -88,7 +92,8 @@ TEST_CASE_TEMPLATE("operator=", T, int, double, std::string, Complex, Rational) 
 }
 
 TEST_CASE_TEMPLATE("generic check", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);
@@ -107,7 +112,8 @@ TEST_CASE_TEMPLATE("generic check", T, int, double, std::string, Complex, Ration
 }
 
 TEST_CASE_TEMPLATE("COPY_CTOR", T, int, double, std::string,  Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);
@@ -127,7 +133,8 @@ TEST_CASE_TEMPLATE("COPY_CTOR", T, int, double, std::string,  Complex, Rational)
 }
 
 TEST_CASE_TEMPLATE("operator eq", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);
@@ -176,7 +183,8 @@ TEST_CASE_TEMPLATE("operator eq", T, int, double, std::string, Complex, Rational
 }
 
 TEST_CASE_TEMPLATE("CLEAR CHECK", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);
@@ -191,7 +199,8 @@ TEST_CASE_TEMPLATE("CLEAR CHECK", T, int, double, std::string, Complex, Rational
 
 
 TEST_CASE_TEMPLATE("TOP THROW", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);
@@ -205,6 +214,12 @@ TEST_CASE_TEMPLATE("TOP THROW", T, int, double, std::string, Complex, Rational) 
 
 
 TEST_CASE_TEMPLATE("MOVE SEMANTICS") {
+  std::vector <T> test;
+  make_vector(10, test);
+  T c1(vector[0]);
+  T c2(vector[1]);
+  T c3(vector[2]);
+
   QueueArrT<T> qa_parent;
   qa_parent.Push(c3);
   qa_parent.Push(c3);
@@ -277,7 +292,8 @@ TEST_CASE_TEMPLATE("MOVE SEMANTICS") {
 
 
 TEST_CASE_TEMPLATE("copy ctor + operator= are acting up", T, int, double, std::string, Complex, Rational) {
-  std::vector <T> vector = make_vector<T>();
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);

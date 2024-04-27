@@ -12,7 +12,8 @@ TEST_CASE_TEMPLATE("first attempt", T, int, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("Push attempt", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   
   StackArrT<T> s;
   s.Push(test[0]);
@@ -32,7 +33,8 @@ TEST_CASE_TEMPLATE("Push attempt", T, int, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("copy ctor", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   
   StackArrT<T> s;
   s.Push(test[0]);
@@ -44,7 +46,8 @@ TEST_CASE_TEMPLATE("copy ctor", T, int, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("operator=", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   
   StackArrT<T> s;
   for (int i = 0; i < 3; i++) {
@@ -67,7 +70,8 @@ TEST_CASE_TEMPLATE("def ctor", T, int, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("initlist ctor", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   T c1 = test[0];
   T c2 = test[1];
   T c3 = test[2];
@@ -85,7 +89,8 @@ TEST_CASE_TEMPLATE("initlist ctor", T, int, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("copy ctor", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   T c1 = test[0];
   T c2 = test[1];
   T c3 = test[2];
@@ -107,7 +112,8 @@ TEST_CASE_TEMPLATE("copy ctor", T, int, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("eq ctor", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   T c1 = test[0];
   T c2 = test[1];
   T c3 = test[2];
@@ -128,7 +134,8 @@ TEST_CASE_TEMPLATE("eq ctor", T, int, std::string, Complex, Rational) {
 }
 
 TEST_CASE_TEMPLATE("empty check", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   T c1 = test[0];
   T c2 = test[1];
   T c3 = test[2];
@@ -154,7 +161,8 @@ TEST_CASE_TEMPLATE("StackArrT<T> ctor", T, int, std::string, Complex, Rational) 
 }
 
 TEST_CASE_TEMPLATE("push, pop, top, clear", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+  std::vector <T> test;
+  make_vector(10, test);
   T c1 = test[0];
   T c2 = test[1];
   T c3 = test[2];

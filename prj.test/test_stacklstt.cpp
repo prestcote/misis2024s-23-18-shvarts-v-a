@@ -9,8 +9,9 @@
 #include <vector>
 #include <string>
 
-TEST_CASE_TEMPLATE("push & pop", T, int, std::string, Complex, Rational) {
-  std::vector <T> test = make_vector<T>();
+TEST_CASE_TEMPLATE("push & pop", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> test;
+  make_vector(10, test);
   StackLstT<T> one;
   for (int i = 0; i < test.size(); i++) {
     one.Push(test[i]);
@@ -25,8 +26,9 @@ TEST_CASE_TEMPLATE("push & pop", T, int, std::string, Complex, Rational) {
   CHECK(one.IsEmpty());
 }
 
-TEST_CASE_TEMPLATE("copy ctor", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+TEST_CASE_TEMPLATE("copy ctor", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> test;
+  make_vector(10, test);
 
   StackLstT<T> sa_parent;
   for (int i = 0; i < test.size(); i++) {
@@ -45,9 +47,10 @@ TEST_CASE_TEMPLATE("copy ctor", T, int, std::string, Complex, Rational) {
   CHECK_EQ(test[test.size() - 1], sa_parent.Top());
 }
 
-TEST_CASE_TEMPLATE("eq ctor", T, int, std::string, Complex, Rational) {
-  //StackArr sa_parent = { c1, c2, c3 };
-  std::vector<T> test = make_vector<T>();
+TEST_CASE_TEMPLATE("eq ctor", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> test;
+  make_vector(10, test);
+
   StackLstT<T> sa_parent;
   for (int i = 0; i < test.size(); i++) {
     sa_parent.Push(test[i]);
@@ -59,8 +62,9 @@ TEST_CASE_TEMPLATE("eq ctor", T, int, std::string, Complex, Rational) {
   }
 }
 
-TEST_CASE_TEMPLATE("empty check", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+TEST_CASE_TEMPLATE("empty check", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> test;
+  make_vector(10, test);
 
   StackLstT<T> sa;
   CHECK_EQ(sa.IsEmpty(), true);
@@ -74,8 +78,9 @@ TEST_CASE_TEMPLATE("empty check", T, int, std::string, Complex, Rational) {
   CHECK_THROWS(sa.Top());
 }
 
-TEST_CASE_TEMPLATE("stacklst ctor", T, int, std::string, Complex, Rational) {
-  std::vector<T> test = make_vector<T>();
+TEST_CASE_TEMPLATE("stacklst ctor", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> test;
+  make_vector(10, test);
 
   StackLstT<T> stack;
   CHECK_EQ(stack.IsEmpty(), 1);
@@ -87,8 +92,9 @@ TEST_CASE_TEMPLATE("stacklst ctor", T, int, std::string, Complex, Rational) {
   CHECK_EQ(eq_copy.IsEmpty(), 1);
 }
 
-TEST_CASE_TEMPLATE("push, pop, top, clear", T, int, std::string, Complex, Rational) {
-  std::vector <T> test = make_vector<T>();
+TEST_CASE_TEMPLATE("push, pop, top, clear", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> test;
+  make_vector(10, test);
 
   StackLstT<T> stack;
   CHECK_THROWS(void(stack.Top()));
@@ -102,8 +108,9 @@ TEST_CASE_TEMPLATE("push, pop, top, clear", T, int, std::string, Complex, Ration
   CHECK_EQ(stack.IsEmpty(), 1);
 }
 
-TEST_CASE_TEMPLATE("i think the problem should be in copy ctor or operator=", T, int, std::string, Complex, Rational) {
-  std::vector <T> test = make_vector<T>();
+TEST_CASE_TEMPLATE("i think the problem should be in copy ctor or operator=", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> test;
+  make_vector(10, test);
   
   StackLstT<T> a;
   CHECK_EQ(a.IsEmpty(), true);
