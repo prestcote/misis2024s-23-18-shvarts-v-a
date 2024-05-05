@@ -5,7 +5,7 @@
 //#include <complex/complex.hpp>
 #include <cstdlib>
 #include <cstddef>
-
+#include <stdexcept>
 
 template <typename T>
 class QueueLstT {

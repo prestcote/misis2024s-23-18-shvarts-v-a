@@ -4,7 +4,7 @@
 #include "doctest.h"
 #include <iostream>
 
-TEST_CASE("were sooo down") {
+ TEST_CASE("were sooo down") {
   StackLst s;
   s.Push(Complex(1, 2));
   s.Push(Complex(1, 3));

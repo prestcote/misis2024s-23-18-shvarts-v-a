@@ -1,6 +1,5 @@
 #include <bitset/bitset.hpp>
 
-
 #include <stdexcept>
 #include <iostream>
 
@@ -71,7 +70,7 @@ BitSet::BitSet(const std::int32_t size) : size_(size) {
   set_.resize((size_ + 31) / 32, 0);
 }
 
-BitSet& BitSet::operator~() const {
+BitSet BitSet::operator~() const {
   BitSet b(*this);
   for (int i = 0; i < set_.size(); i++) {
     b.set_[i] = ~(b.set_[i]);
@@ -86,7 +85,7 @@ BitSet& BitSet::operator&=(const BitSet& rhs) {
     }
   }
   else {
-    throw std::exception("bitsets with different sizes");
+    throw std::logic_error("bitsets with different sizes");
   }
   return *this;
 }
@@ -98,7 +97,7 @@ BitSet& BitSet::operator|=(const BitSet& rhs) {
     }
   }
   else {
-    throw std::exception("bitsets with different sizes");
+    throw std::logic_error("bitsets with different sizes");
   }
   return *this;
 }
@@ -110,24 +109,24 @@ BitSet& BitSet::operator^=(const BitSet& rhs) {
     }
   }
   else {
-    throw std::exception("bitsets with different sizes");
+    throw std::logic_error("bitsets with different sizes");
   }
   return *this;
 }
 
-BitSet& operator&(const BitSet& lhs, const BitSet& rhs) {
+BitSet operator&(const BitSet& lhs, const BitSet& rhs) {
   BitSet b(lhs);
   b &= rhs;
   return b;
 }
 
-BitSet& operator|(const BitSet& lhs, const BitSet& rhs) {
+BitSet operator|(const BitSet& lhs, const BitSet& rhs) {
   BitSet b(lhs);
   b |= rhs;
   return b;
 }
 
-BitSet& operator^(const BitSet& lhs, const BitSet& rhs) {
+BitSet operator^(const BitSet& lhs, const BitSet& rhs) {
   BitSet b(lhs);
   b ^= rhs;
   return b;

@@ -3,6 +3,7 @@
 #define QUEUEARRT_HPP_HPP
 
 //#include <complex/complex.hpp>
+#include <stdexcept>
 #include <cstdlib>
 #include <cstddef>
 #include <memory>
@@ -184,7 +185,7 @@ QueueArrT<T>::QueueArrT(QueueArrT&& copy) noexcept {
   copy.head_ = -1;
   size_ = copy.size_;
   copy.size_ = 0;
-  data_ = std::forward(copy.data_);
+  data_ = std::move(copy.data_);
 }
 
 template <typename T>

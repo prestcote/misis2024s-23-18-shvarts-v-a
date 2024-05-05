@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <algorithm>
 
-
 StackArr::~StackArr() {
   if (data_) {
     delete[] data_;
@@ -117,7 +116,7 @@ void StackArr::Clear() noexcept {
   size_ = 0;
 }
 
-StackArr::StackArr(StackArr&& copy) {
+StackArr::StackArr(StackArr&& copy) noexcept {
   if (this != &copy) {
     size_ = copy.size_;
     head_ = copy.head_;
@@ -128,7 +127,7 @@ StackArr::StackArr(StackArr&& copy) {
   }
 }
 
-StackArr& StackArr::operator=(StackArr&& copy) {
+StackArr& StackArr::operator=(StackArr&& copy) noexcept {
   if (this != &copy) {
     size_ = copy.size_;
     head_ = copy.head_;

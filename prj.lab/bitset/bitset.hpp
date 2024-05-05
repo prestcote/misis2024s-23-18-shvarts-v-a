@@ -32,12 +32,8 @@ public:
 
   BitSet& operator&=(const BitSet&) ;
   BitSet& operator|=(const BitSet&);
-  BitSet& operator~() const;
+  BitSet operator~() const;
   BitSet& operator^=(const BitSet&);
-
-  BitSet& operator&(const BitSet& rhs) const;
-  BitSet& operator|(const BitSet& rhs) const;
-  BitSet& operator^(const BitSet& rhs) const;
 
   void Print(); //attempt ig
 
@@ -74,8 +70,8 @@ private:
   std::vector <uint32_t> set_;
 };
 
-BitSet& operator&(const BitSet& lhs, const BitSet& rhs);
-BitSet& operator|(const BitSet& lhs, const BitSet& rhs);
-BitSet& operator^(const BitSet& lhs, const BitSet& rhs);
+BitSet operator&(const BitSet& lhs, const BitSet& rhs);
+BitSet operator|(const BitSet& lhs, const BitSet& rhs);
+BitSet operator^(const BitSet& lhs, const BitSet& rhs);
 
 #endif

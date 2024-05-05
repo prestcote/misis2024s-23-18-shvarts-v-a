@@ -109,14 +109,14 @@ void QueueLstPr::Print() {
   std::cout << std::endl;
 }
 
-QueueLstPr::QueueLstPr(QueueLstPr&& copy) {
+QueueLstPr::QueueLstPr(QueueLstPr&& copy) noexcept {
   head_ = copy.head_;
   tail_ = copy.tail_;
   copy.head_ = nullptr;
   copy.tail_ = nullptr;
 }
 
-QueueLstPr& QueueLstPr::operator=(QueueLstPr&& copy) {
+QueueLstPr& QueueLstPr::operator=(QueueLstPr&& copy) noexcept {
   if (this != &copy) {
     Clear();
     std::swap(head_, copy.head_);

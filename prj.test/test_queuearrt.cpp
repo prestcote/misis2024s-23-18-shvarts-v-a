@@ -213,9 +213,9 @@ TEST_CASE_TEMPLATE("TOP THROW", T, int, double, std::string, Complex, Rational) 
 }
 
 
-TEST_CASE_TEMPLATE("MOVE SEMANTICS") {
-  std::vector <T> test;
-  make_vector(10, test);
+TEST_CASE_TEMPLATE("MOVE SEMANTICS", T, int, double, std::string, Complex, Rational) {
+  std::vector <T> vector;
+  make_vector(10, vector);
   T c1(vector[0]);
   T c2(vector[1]);
   T c3(vector[2]);

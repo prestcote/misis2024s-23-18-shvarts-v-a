@@ -4,15 +4,16 @@
 
 #include <cstdlib>
 #include <cstddef>
+#include <stdexcept>
 
 template <typename T>
 class QueueLstPrT {
 public:
   QueueLstPrT() = default;
   QueueLstPrT(const QueueLstPrT& copy);
-  QueueLstPrT(QueueLstPrT&&);
+  QueueLstPrT(QueueLstPrT&&) noexcept;
   QueueLstPrT& operator=(const QueueLstPrT& copy);
-  QueueLstPrT& operator=(QueueLstPrT&&);
+  QueueLstPrT& operator=(QueueLstPrT&&) noexcept;
   ~QueueLstPrT();
 
   T& Top();
@@ -149,7 +150,7 @@ void QueueLstPrT<T>::Print() {
 }
 
 template <typename T>
-QueueLstPrT<T>::QueueLstPrT(QueueLstPrT&& copy) {
+QueueLstPrT<T>::QueueLstPrT(QueueLstPrT&& copy) noexcept {
   head_ = copy.head_;
   tail_ = copy.tail_;
   copy.head_ = nullptr;
@@ -157,7 +158,7 @@ QueueLstPrT<T>::QueueLstPrT(QueueLstPrT&& copy) {
 }
 
 template <typename T>
-QueueLstPrT<T>& QueueLstPrT<T>::operator=(QueueLstPrT&& copy) {
+QueueLstPrT<T>& QueueLstPrT<T>::operator=(QueueLstPrT&& copy) noexcept {
   if (this != &copy) {
     Clear();
     std::swap(head_, copy.head_);

@@ -5,6 +5,7 @@
 //#include <complex/complex.hpp>
 #include <cstddef>
 #include <cstdlib>
+#include <stdexcept>
 
 template <typename T>
 class StackLstT {

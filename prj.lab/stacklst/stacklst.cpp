@@ -2,6 +2,8 @@
 #include <complex/complex.hpp>
 #include <iostream>
 
+#include <stdexcept>
+
 
 StackLst::~StackLst() {
   Node* present = head_;
