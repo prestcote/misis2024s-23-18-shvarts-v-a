@@ -1,4 +1,13 @@
-week: 21.05 - 28.05
+week: 28.04 - 4.05
+REPORT:
+- 
+
+PLAN:
+- codeforces 3 tasks
+- overlook time tests i guess...???
+- read about implot
+
+week: 21.04 - 27.04
 REPORT:
 - codeforces done
 - template unit tests done
@@ -15,7 +24,7 @@ TODO:
 - time tests for queuearr and queuelst libraries
 - read smth about data visualization for time tests 
 
-week: 15.05-20.05
+week: 15.04 - 20.04
 REPORT:
 - template classes done
 - codeforces done
@@ -27,7 +36,7 @@ TODO:
 - template unit tests
 - bitset io 
 
-week: 8.05 - 14.05
+week: 8.04 - 14.04
 REPORT:
 - codeforces: done
 - stacklst template: done for now
@@ -40,7 +49,7 @@ TODO:
 - stacklst template
 - stacklst: find some mistakes
 
-week:1.05 - 7.05
+week:1.04 - 7.04
 REPORT:
 - bitset: i did something and everything crashed
 - 6 tasks DONE!!!
@@ -50,7 +59,7 @@ TODO:
 - codeforces (6 tasks)
 - stacklst queuearr crashed
 
-week: 25.04 - 31.04
+week: 25.03 - 31.03
 REPORT:
 - bitset: get & set done; [] to do
 - queuelst move semantics works!!
