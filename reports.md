@@ -1,6 +1,11 @@
-week: 28.04 - 4.05
+week: 6.05 - 12.05
+PLAN:
+- codeforces 3 tasks
+
+week: 28.04 - 5.05
 REPORT:
-- 
+- codeforces done
+- looked over some mistakes & some warnings
 
 PLAN:
 - codeforces 3 tasks
