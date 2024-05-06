@@ -21,8 +21,6 @@ public:
   bool IsEmpty() const noexcept;
   void Clear() noexcept;
 
-  void Print();
-
 private:
   struct Node {
     float value;

@@ -1,6 +1,5 @@
 #include <queuelstt/queuelstt.hpp>
 #include "vector.hpp"
-
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include <iostream>

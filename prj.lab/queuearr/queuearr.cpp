@@ -157,7 +157,3 @@ QueueArr& QueueArr::operator=(QueueArr&& copy) noexcept {
   return *this;
 }
 
-
-
-                                              // SAY WHAT
-

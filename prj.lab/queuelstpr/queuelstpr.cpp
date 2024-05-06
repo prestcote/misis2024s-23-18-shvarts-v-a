@@ -95,20 +95,6 @@ void QueueLstPr::Pop() noexcept {
   }
 }
 
-void QueueLstPr::Print() {
-  if (head_ != nullptr) {
-    Node* cur = head_;
-    while (cur != nullptr) {
-      std::cout << cur->value << ' ';
-      cur = cur->next_;
-    }
-  }
-  else {
-    std::cout << "empty";
-  }
-  std::cout << std::endl;
-}
-
 QueueLstPr::QueueLstPr(QueueLstPr&& copy) noexcept {
   head_ = copy.head_;
   tail_ = copy.tail_;

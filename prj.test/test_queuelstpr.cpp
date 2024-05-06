@@ -8,30 +8,21 @@ TEST_CASE("were going down") {
   CHECK_THROWS(q.Top());
   q.Push(1);
   CHECK_EQ(q.IsEmpty(), 0);
-  q.Print();
   q.Push(2);
   CHECK_EQ(q.IsEmpty(), 0);
-  q.Print();
   q.Push(1);
-  q.Print();
   q.Push(3);
-  q.Print();
   q.Push(2);
-  q.Print();
   q.Push(10);
   q.Push(9);
-  q.Print();
   q.Push(8);
   q.Push(7);
-  q.Print();
   q.Pop();
   q.Pop();
   q.Pop();
   q.Pop();
   q.Pop();
   q.Pop();
-  q.Print();
-
 }
 
 TEST_CASE("generic test 0") {
@@ -335,7 +326,6 @@ TEST_CASE("QueueLstPr constructors") {
   CHECK_FALSE(queue3.IsEmpty());
 
   QueueLstPr queue4(std::move(queue3));
-  queue3.Print();
   CHECK(queue4.Top() == 1);
   CHECK(queue3.IsEmpty());
 }
@@ -354,7 +344,6 @@ TEST_CASE("QueueLstPr - right order") {
   queue.Push(1);
   queue.Push(3);
   queue.Push(2);
-  queue.Print();
   CHECK(queue.Top() == 1);
   queue.Pop();
   CHECK(queue.Top() == 2);

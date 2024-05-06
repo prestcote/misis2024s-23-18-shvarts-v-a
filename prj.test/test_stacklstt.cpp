@@ -1,10 +1,8 @@
 #include <stacklstt/stacklstt.hpp>
-//#include <complex/complex.hpp>
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
 #include "vector.hpp"
-
 #include <iostream>
 #include <vector>
 #include <string>

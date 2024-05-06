@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include <iostream>
 
-
-
 int32_t BitSet::GetSize() const noexcept {
   return size_;
 }
