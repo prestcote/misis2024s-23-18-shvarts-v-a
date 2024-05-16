@@ -7,7 +7,7 @@ int main() {
     int n = 0;
     std::cin >> n;
     int mult = 1;
-    int min_n = 100000000000;
+    int min_n = INT32_MIN;
     bool ZERO = false;
     for (int j = 0; j < n; ++j) {
       int x = 0;

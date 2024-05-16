@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <map>
+#include <cmath>
 #include <complex/complex.hpp>
 
 /*
@@ -482,9 +483,9 @@ void testMethods() {
   double z = 100;
   z /= 9995577897775;
   double power = 6575763;
-  double y = pow(z, 0.5 / power);
-  y = pow(y, 2);
-  y = pow(y, power);
+  double y = std::pow(z, 0.5 / power);
+  y = std::pow(y, 2);
+  y = std::pow(y, power);
 
   ostr.str("");
   ostr << (y == z);

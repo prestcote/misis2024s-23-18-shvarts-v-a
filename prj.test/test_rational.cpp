@@ -204,6 +204,7 @@ TEST_CASE("IO") {
   std::ostringstream ostream;
   CHECK(istream7.fail());
 
-  ostream << Rational(2, 3);
+  Rational rr(2, 3);
+  ostream << rr;
   CHECK(ostream.str() == "2/3");
 }; 

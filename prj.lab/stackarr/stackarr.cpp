@@ -29,14 +29,14 @@ bool StackArr::IsEmpty() const noexcept {
 
 Complex& StackArr::Top() {
   if (head_ < 0) {
-    throw std::exception("stack underflow");
+    throw std::logic_error("stack underflow");
   }
   return *(data_ + head_);
 }
 
 const Complex& StackArr::Top() const {
   if (head_ < 0) {
-    throw std::exception("stack underflow");
+    throw std::logic_error("stack underflow");
   }
   return *(data_ + head_);
 }

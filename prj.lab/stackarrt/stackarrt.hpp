@@ -63,7 +63,7 @@ bool StackArrT<T>::IsEmpty() const noexcept {
 template <typename T>
 T& StackArrT<T>::Top() {
   if (head_ < 0) {
-    throw std::exception("stack underflow");
+    throw std::logic_error("stack underflow");
   }
   return *(data_ + head_);
 }
@@ -71,7 +71,7 @@ T& StackArrT<T>::Top() {
 template <typename T>
 const T& StackArrT<T>::Top() const {
   if (head_ < 0) {
-    throw std::exception("stack underflow");
+    throw std::logic_error("stack underflow");
   }
   return *(data_ + head_);
 }

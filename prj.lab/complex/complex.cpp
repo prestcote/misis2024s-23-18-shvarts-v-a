@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <cmath>
 #include <limits>
 #include <complex/complex.hpp>
 
@@ -134,7 +135,7 @@ Complex Complex::operator-() const noexcept {
 }
 
 bool Complex::operator== (const Complex& rhs) const noexcept {
-  return std::abs(re - rhs.re) <= 2 * DBL_EPSILON && std::abs(im - rhs.im) <= 2 * DBL_EPSILON;
+  return std::abs(re - rhs.re) <= 2 * std::numeric_limits<double>::epsilon() && std::abs(im - rhs.im) <= 2 * std::numeric_limits<double>::epsilon();
 }
 
 bool Complex::operator!= (const Complex& rhs) const noexcept {

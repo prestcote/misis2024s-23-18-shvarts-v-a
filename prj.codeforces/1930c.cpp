@@ -3,6 +3,7 @@
 #include <set>
 #include <cstdlib>
 #include <vector>
+#include <algorithm>
 
 
 int main() {
