@@ -1,4 +1,17 @@
+week: 13.05 - 19.05
+REPORT:
+- robocalc done (in a way??)
+- codeforces in progress
+
+PLAN:
+- codeforces 3 tasks
+- robocalc
+
 week: 6.05 - 12.05
+REPORT:
+- codeforces done (i think??)
+- im dead
+
 PLAN:
 - codeforces 3 tasks
 - what
