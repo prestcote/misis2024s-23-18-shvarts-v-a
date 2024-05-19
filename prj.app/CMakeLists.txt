@@ -1,1 +1,3 @@
 add_subdirectory(timing_q)
+
+add_subdirectory(robocalc)
