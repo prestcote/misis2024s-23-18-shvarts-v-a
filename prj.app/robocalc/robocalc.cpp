@@ -5,23 +5,21 @@
 #include <string>
 #include <exception>
 
-class Base {
+class Cmd {
 public:
-  Base() = default;
-  Base(double v) : v_(v) {};
+  Cmd() = default;
+  Cmd(double v) : v_(v) {};
 
-  virtual double out(double start) {
-    return 1;
-  }
-
+  virtual double out(double start) = 0;
 protected: 
   double v_ = 0;
+  Cmd* next_ = nullptr;
 };
 
-class Add : public Base {
+class Add : public Cmd {
 public:
   Add() = default;
-  Add(double v_) : Base(v_) {};
+  Add(double v_) : Cmd(v_) {};
 
   double out(double start) override {
     v_ += start;
@@ -30,10 +28,10 @@ public:
   }
 };
 
-class Mul : public Base {
+class Mul : public Cmd {
 public:
   Mul() = default;
-  Mul(double v_) : Base(v_) {}
+  Mul(double v_) : Cmd(v_) {}
 
   double out(double start) override {
     v_ *= start;
@@ -42,10 +40,10 @@ public:
   }
 };
 
-class Sub : public Base {
+class Sub : public Cmd {
 public:
   Sub() = default;
-  Sub(double v_) : Base(v_) {};
+  Sub(double v_) : Cmd(v_) {};
 
   double out(double start) override {
     v_ = start - v_;
@@ -54,10 +52,10 @@ public:
   }
 };
 
-class Div : public Base {
+class Div : public Cmd {
 public:
   Div() = default;
-  Div(double v_) : Base(v_) {};
+  Div(double v_) : Cmd(v_) {};
 
   double out(double start) override {
     v_ = start / v_;
@@ -66,37 +64,62 @@ public:
   }
 };
 
-void run(std::string command, int operand) {
-   //posdfopsdifopsdfopisdopf i have no idea what you want ngl
-  Base* ptr = nullptr;
-  if (command == "ADD") {
-    ptr = new Add();
+int execute(std::string command_, int operand_, std::vector<Cmd*>operations) {
+   //posdfopsdifopsdfopisdopf i have no idea what to do ngl
+  Cmd* ptr = nullptr;
+  if (command_ == "ADD") {
+    ptr = new Add(operand_);
+    operations.push_back(ptr);
   }
-  else if (command == "MUL") {
-    ptr = new Mul();
+  else if (command_ == "MUL") {
+    ptr = new Mul(operand_);
+    operations.push_back(ptr);
   }
-  else if (command == "SUB") {
-    ptr = new Sub();
+  else if (command_ == "SUB") {
+    ptr = new Sub(operand_);
+    operations.push_back(ptr);
   }
-  else if (command == "DIV") {
-    ptr = new Div();
+  else if (command_ == "DIV") {
+    ptr = new Div(operand_);
+    operations.push_back(ptr);
   }
-  else if (command == "REV") {
-    //TODO
+  else if (command_ == "REV") {
+    if (operand_ < 0 || operand_ > operations.size()) {
+      throw std::logic_error("wrong size");
+    }
+    operations.resize(operations.size() - operand_);
   }
-  else if (command == "OUT") {
-    //TODO
+  else if (command_ == "OUT") {
+    for (Cmd* ptr : operations) {
+      operand_ = ptr->out(operand_);
+    }
   }
+  return operand_;
 }
 
 int main() {
-  std::ifstream file("input.txt");
+  std::fstream file;
+  file.open("input.txt", std::ios::in);
+
+  if (!file) {
+    std::cerr << "Unable to open file\n";
+    return 1;
+  }
+
   std::string line;
   std::istringstream iss(line);
-  std::string command_;
-  int operand_;
+  std::string command_ = "";
+  int operand_ = 0;
+
+  std::vector <Cmd*> operations;
+
   while (std::getline(file, line)) {
     iss >> command_ >> operand_;
-
+    execute(command_, operand_, operations);
   }
+  file.close();
+
+  std::ofstream output("output.txt");
+  output << operand_ << "\n";
+  return 0;
 }
